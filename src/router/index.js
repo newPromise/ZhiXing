@@ -18,12 +18,13 @@ import WatchSet from '@/components/grabTic/watchSet';
 import SiteTys from '@/components/grabTic/siteTys';
 import ChoiceTrainNo from '@/components/grabTic/choiceTrainNo';
 import Login from '@/components/login/login';
-
+import OutService from '@/components/person/outerService';
 // 个人中心
 
 import AboutPerson from '@/components/person/aboutPerson';
 import CountManage from '@/components/person/countManage';
 
+import TrainTimeSearch from '@/components/person/trainTimeSerach';
 Vue.use(Router);
 
 export default new Router({
@@ -54,6 +55,11 @@ export default new Router({
     {path: '/aboutPerson', name: 'aboutPerson', component: AboutPerson},
     {path: '/countManage', name: 'countManage', component: CountManage},
     // 登录智行
-    {path: '/login', name: 'login', component: Login}
+    {path: '/login', name: 'login', component: Login},
+    // 旅行服务
+    {path: '/outService', name: 'outService', component: OutService},
+    // 正晚点查询
+    {path: '/trainTimeSearch', name: 'trainTimeSearch', component: TrainTimeSearch}
+
   ]
 });

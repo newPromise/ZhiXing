@@ -1,5 +1,6 @@
 import Vue from 'vue';
 var vue = new Vue(); // 为什么使用这种方法获得
+import { Indicator, Toast } from 'mint-ui';
 const actions = {
   setCity: ({commit}, newVal) => {
     commit('setCity', newVal);
@@ -59,11 +60,22 @@ const actions = {
   // 火车票车次查询数据
   getLineRes: ({commit}, params) => {
     let obj = {url: 'api/train/line'};
+    Indicator.open('正在查询');
     obj.params = {
-      trainno: params.trainno
+      trainno: params.trainno,
+      appkey: '3cf7ad9107df44c9',
+      appsecret: '7Iq25fL9BuX6xiNoMnTcQ85TAD8IrZEW'
     };
     obj.success = res => {
       commit('getLineRes', res.result);
+      if (res.result === '') {
+        Toast({
+          message: '没有查询到车次信息',
+          position: 'bottom',
+          duration: 2000
+        });
+      }
+      Indicator.close();
     };
     vue.$get(obj);
   }

@@ -1,10 +1,9 @@
 <template>
   <div id="app">
     <router-view class='main-view'></router-view>
-    <bottom-bar v-if=""></bottom-bar>
+    <bottom-bar v-if="botShow"></bottom-bar>
   </div>
 </template>
-
 <script>
 import bottomBar from '@/components/common/bottomBar';
 export default {
@@ -14,7 +13,7 @@ export default {
   },
   data () {
     return {
-      botShow: true
+      botShow: false
     };
   },
   watch: {

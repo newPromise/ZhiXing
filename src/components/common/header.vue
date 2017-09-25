@@ -6,7 +6,7 @@
                 <span @click="$router.go(-1)">返回</span>
             </slot>
         </div>
-        <div>
+        <div class="title">
             <slot name="title"><span>{{title}}</span></slot>
         </div>
         <div class="right">
@@ -75,6 +75,8 @@
         .right
           
                 text-align: right;
+        .title
+          flex: 2;        
     .clear
         height: 4rem;                            
 </style>
