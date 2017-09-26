@@ -78,6 +78,9 @@ const actions = {
       Indicator.close();
     };
     vue.$get(obj);
+  },
+  setSearchno: ({commit}, newVal) => {
+    commit('setSearchno', newVal);
   }
 };
 

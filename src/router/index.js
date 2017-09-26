@@ -19,6 +19,7 @@ import SiteTys from '@/components/grabTic/siteTys';
 import ChoiceTrainNo from '@/components/grabTic/choiceTrainNo';
 import Login from '@/components/login/login';
 import OutService from '@/components/person/outerService';
+import TrainNo from '@/components/person/trainNoRes';
 // 个人中心
 
 import AboutPerson from '@/components/person/aboutPerson';
@@ -59,7 +60,9 @@ export default new Router({
     // 旅行服务
     {path: '/outService', name: 'outService', component: OutService},
     // 正晚点查询
-    {path: '/trainTimeSearch', name: 'trainTimeSearch', component: TrainTimeSearch}
+    {path: '/trainTimeSearch', name: 'trainTimeSearch', component: TrainTimeSearch},
+    // 正晚点查询 车次结果
+    {path: '/trainno', name: 'trainno', component: TrainNo}
 
   ]
 });

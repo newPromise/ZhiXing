@@ -60,7 +60,8 @@
       watch: {
         'lineRes': function (val) {
           if (val) {
-            this.$router.push('/');
+            this.$router.push('/trainno');
+            this.setSearchno(this.trainno);
           } else {
           }
         }
@@ -82,7 +83,7 @@
           this.getLineRes({trainno: this.trainno});
           console.log('车次信息', this.lineRes);
         },
-        ...mapActions(['getLineRes'])
+        ...mapActions(['getLineRes', 'setSearchno'])
       },
       mounted () {
       }

@@ -26,7 +26,8 @@ let state = {
   // showDate 用来表示日历中显示的日期
   liveDate: '',
   // loginMessage 用来存放登录信息，包括登录账号，密码等
-  loginMsg: {}
+  loginMsg: {},
+  searchno: ''
 };
 
 export {state};
