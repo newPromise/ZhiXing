@@ -5,11 +5,11 @@
                 <div class="c-l">
                     <div class="s-c">
                         <span class="cLabel">出发城市</span>
-                        <span class="cVal">北京</span>
+                        <span class="cVal">{{start}}</span>
                     </div>
                     <div class="e-c">
                         <span class="cLabel">到达城市</span>
-                        <span class="cVal">上海</span>
+                        <span class="cVal">{{end}}</span>
                     </div>
                 </div>
                 <div class="togC c-r"></div>
@@ -21,7 +21,7 @@
                 </div>
             </div>
             <div class="search">
-                <button class="searchBtn">查询</button>
+                <button class="searchBtn" @click="searchBus">查询</button>
             </div>
         </div>
         <div class="some-tips">
@@ -33,10 +33,13 @@
     </div>
 </template>
 <script type="text/javascript">
+    import {mapActions, mapState} from 'vuex';
     export default {
       name: 'bus',
       data () {
         return {
+          start: '北京',
+          end: '天津',
           tips: [
             {icon: '', title: '火车票'},
             {icon: '', title: '机场巴士'},
@@ -45,7 +48,22 @@
           ]
         };
       },
+      computed: {
+        ...mapState(['busLine'])
+      },
+      watch: {
+        'busLine': function (val) {
+          if (val) {
+            this.$router.push('/busRes');
+          }
+        }
+      },
       methods: {
+        searchBus () {
+          console.log('us', this.busLine);
+          this.getBusline({start: this.start, end: this.end});
+        },
+        ...mapActions(['getBusline'])
       },
       mounted () {
       }

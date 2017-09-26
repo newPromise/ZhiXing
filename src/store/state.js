@@ -27,7 +27,9 @@ let state = {
   liveDate: '',
   // loginMessage 用来存放登录信息，包括登录账号，密码等
   loginMsg: {},
-  searchno: ''
+  searchno: '',
+  // busline 用于存放汽车站站查询
+  busLine: {}
 };
 
 export {state};

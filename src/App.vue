@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <router-view class='main-view'></router-view>
-    <bottom-bar v-if="botShow"></bottom-bar>
+    <bottom-bar v-if=""></bottom-bar>
   </div>
 </template>
 <script>
@@ -13,7 +13,7 @@ export default {
   },
   data () {
     return {
-      botShow: false
+      botShow: true
     };
   },
   watch: {

@@ -79,6 +79,30 @@ const actions = {
     };
     vue.$get(obj);
   },
+  // 汽车站站线路查询
+  getBusline: ({commit}, params) => {
+    let obj = {url: 'api/bus/city2c'};
+    Indicator.open('正在查询汽车线路');
+    obj.params = {
+      start: params.start,
+      end: params.end,
+      appkey: '3cf7ad9107df44c9',
+      appsecret: '7Iq25fL9BuX6xiNoMnTcQ85TAD8IrZEW'
+    };
+    obj.success = res => {
+      commit('getBusline', res.result);
+      if (res.result === '') {
+        Toast({
+          message: '没有查询到车次信息',
+          position: 'bottom',
+          duration: 2000
+        });
+      }
+      Indicator.close();
+    };
+    vue.$get(obj);
+    commit('getBusline', '');
+  },
   setSearchno: ({commit}, newVal) => {
     commit('setSearchno', newVal);
   }

@@ -35,6 +35,9 @@ const mutations = {
   },
   setSearchno (state, newVal) {
     state.searchno = newVal;
+  },
+  getBusline (state, newVal) {
+    state.busLine = newVal;
   }
 };
 export { mutations };
