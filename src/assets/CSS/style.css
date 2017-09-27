@@ -11,3 +11,6 @@ input, select { outline: none};
             border: none;
             font-size :1.2rem;
             border-radius: 0.3rem;}
+.mint-checkbox-core {
+    border-radius: 5px !important;
+}            

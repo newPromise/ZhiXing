@@ -29,7 +29,8 @@ let state = {
   loginMsg: {},
   searchno: '',
   // busline 用于存放汽车站站查询
-  busLine: {}
+  busLine: {},
+  busSite: {}
 };
 
 export {state};

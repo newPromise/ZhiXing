@@ -38,6 +38,9 @@ const mutations = {
   },
   getBusline (state, newVal) {
     state.busLine = newVal;
+  },
+  getBussite (state, newVal) {
+    state.busSite = newVal;
   }
 };
 export { mutations };

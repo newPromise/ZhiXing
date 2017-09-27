@@ -103,6 +103,20 @@ const actions = {
     vue.$get(obj);
     commit('getBusline', '');
   },
+  // 汽车城市站点查询
+  getBussite: ({commit}, params) => {
+    let obj = {url: 'api/bus/station'};
+    obj.params = {
+      city: params.city,
+      appkey: '3cf7ad9107df44c9',
+      appsecret: '7Iq25fL9BuX6xiNoMnTcQ85TAD8IrZEW'
+    };
+    obj.success = res => {
+      commit('getBussite', res.result);
+    };
+    vue.$get(obj);
+    commit('getBussite', '');
+  },
   setSearchno: ({commit}, newVal) => {
     commit('setSearchno', newVal);
   }
