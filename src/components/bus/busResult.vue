@@ -3,12 +3,12 @@
         <div class="bus-header">
             <header-top :title="result[0].startcity+'-'+result[0].endcity" baccolor="white" color="black"></header-top>
             <div class="head-bar">
-                <span class="filter">筛选</span>
+                <span class="filter" @click="showFilter = !showFilter">筛选</span>
                 <span class="go">下班就走</span>
                 <span class="direct">景区直达</span>
             </div>
         </div>
-        <div class="filter-content">
+        <div class="filter-content" v-if="showFilter">
             <div class="filter">
                 <div class="content">
                     <div class="aside">
@@ -24,13 +24,13 @@
                 <div class="bottom-wrap">
                     <div class="bottom">
                         <span>清空</span>
-                        <span class='to-filter'>筛选(共79班)</span>
+                        <span @click="toFilter" class='to-filter'>筛选(共{{result.length}}班)</span>
                     </div>
                 </div>
             </div>
         </div>
         <div class="bus-content">
-            <div class="res-items" v-for="item of result">
+            <div class="res-items" v-for="item,index of result" :key="index">
                 <div class="bus-time">
                     <p>&nbsp</p>
                     <p>{{item.starttime}}</p>
@@ -63,9 +63,10 @@
       },
       data () {
         return {
+          showFilter: false,
           result: {},
           startstations: [],
-          activeTerm: '',
+          activeTerm: 'startSta',
           terms: {
             'startSta': '出发站',
             'endSta': '到达站',
@@ -75,8 +76,8 @@
           filters: {
             'startSta': ['1'],
             'endSta': ['2'],
-            'startTime': ['3'],
-            'tickFilter': ['4']
+            'startTime': ['早上（00:00-06:00）', '上午(06:00 - 12:00)', '下午(12:00-18:00)', '晚上(18:00-24:00)'],
+            'tickFilter': ['固定班']
           }
         };
       },
@@ -87,6 +88,12 @@
         }
       },
       methods: {
+        toFilter (startStation, endStation) {
+          alert('goog');
+          this.showFilter = !this.showFilter;
+          this.result = this.result.filter((item, index) => {
+          });
+        },
         togFilter (pro) {
           this.activeTerm = pro;
         },
@@ -196,7 +203,7 @@
                         overflow: hidden;
                         overflow-y: scroll;
                         .mint-checklist-title
-                            margin: 0;
+                            margin: 0 !important;
                         .mint-cell
                             height: 3rem !important;       
                 .bottom-wrap

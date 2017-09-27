@@ -23,7 +23,7 @@
                         <span class="statu view"><span>查看</span></span>
                         <!--<span class="statu preorder">预定</span>-->
                     </div>
-                    <p class="find-tick">{{comNum(item.tickNum)}}</p>
+                    <p class="find-tick">{{}}</p>
                 </div>
             </div>
         </div>
@@ -48,7 +48,8 @@
       name: 'grabDet',
       data () {
         return {
-          popupVisible: false
+          popupVisible: false,
+          comNum: 1
         };
       },
       filters: {
@@ -57,9 +58,6 @@
         // MessageBox
       },
       computed: {
-        comNum: function (val) {
-          console.log(val);
-        },
         ...mapState(['grabTicks'])
       },
       methods: {
