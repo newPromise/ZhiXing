@@ -30,7 +30,18 @@ let state = {
   searchno: '',
   // busline 用于存放汽车站站查询
   busLine: {},
-  busSite: {}
+  busSite: {},
+  // choiceLine,用于存存放被点击到的车次详细信息
+  choiceLine: {
+    date: '',
+    distance: '',
+    startcity: '',
+    endcity: '',
+    startstation: '',
+    endstation: '',
+    starttime: '',
+    price: ''
+  }
 };
 
 export {state};

@@ -8,6 +8,7 @@ import Plane from '@/components/plane/plane';
 import PlaRes from '@/components/plane/plaResult';
 import Bus from '@/components/bus/bus';
 import BusRes from '@/components/bus/busResult';
+import LineDet from '@/components/bus/lineDet';
 import Hotel from '@/components/hotel/hotel';
 import HotRes from '@/components/hotel/hotResult';
 import AllCitys from '@/components/common/allCitys';
@@ -62,7 +63,9 @@ export default new Router({
     // 正晚点查询
     {path: '/trainTimeSearch', name: 'trainTimeSearch', component: TrainTimeSearch},
     // 正晚点查询 车次结果
-    {path: '/trainno', name: 'trainno', component: TrainNo}
+    {path: '/trainno', name: 'trainno', component: TrainNo},
+    // 车次详细信息
+    {path: '/lineDet', name: 'lineDet', component: LineDet}
 
   ]
 });

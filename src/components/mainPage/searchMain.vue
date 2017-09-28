@@ -5,7 +5,9 @@
             {{link.name}}
         </router-link>
     </div>
+    <transition name="slide">
       <router-view class='search-view'></router-view>
+    </transition>
 </div>
 </template>
 <script type="text/javascript">
@@ -59,5 +61,12 @@
                 height: 4rem;
                 line-height: 4rem;
         .search-view
-            margin-top: 60px;              
+            margin-top: 60px;
+        .slide-enter
+          transform: translateX(100%);
+        .slide-enter-active
+          transition: all .3s ease;
+        .slide-leave-to
+          transform: translateX(-100%);
+                                   
 </style>

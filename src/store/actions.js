@@ -119,6 +119,9 @@ const actions = {
   },
   setSearchno: ({commit}, newVal) => {
     commit('setSearchno', newVal);
+  },
+  setChoiceline: ({commit}, newVal) => {
+    commit('setChoiceline', newVal);
   }
 };
 

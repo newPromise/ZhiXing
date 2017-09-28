@@ -41,6 +41,21 @@ const mutations = {
   },
   getBussite (state, newVal) {
     state.busSite = newVal;
+  },
+  setChoiceline (state, {
+    date, distance, startcity, endcity,
+    startstation,
+    endstation,
+    starttime,
+    price}) {
+    state.choiceLine.date = date;
+    state.choiceLine.distance = distance;
+    state.choiceLine.startcity = startcity;
+    state.choiceLine.endcity = endcity;
+    state.choiceLine.startstation = startstation;
+    state.choiceLine.endstation = endstation;
+    state.choiceLine.starttime = starttime;
+    state.choiceLine.price = price;
   }
 };
 export { mutations };

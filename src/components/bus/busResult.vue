@@ -30,7 +30,7 @@
             </div>
         </div>
         <div class="bus-content">
-            <div class="res-items" v-for="item,index of result" :key="index">
+            <div class="res-items"  @click="lineDetail(item)"  v-for="item,index of result" :key="index">
                 <div class="bus-time">
                     <p>&nbsp</p>
                     <p>{{item.starttime}}</p>
@@ -96,6 +96,11 @@
         }
       },
       methods: {
+        // 查看车次详细信息
+        lineDetail (item) {
+          this.setChoiceline(item);
+          this.$router.push('/');
+        },
         // 筛选条件清空
         clearAll () {
           for (let key in this.filtCondition) {
@@ -175,7 +180,7 @@
             this.filters.endSta = pushItem(val);
           };
         },
-        ...mapActions(['getBusLine', 'getBussite'])
+        ...mapActions(['getBusLine', 'getBussite', 'setChoiceline'])
       },
       mounted () {
         this.result = this.busLine;
