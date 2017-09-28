@@ -12,7 +12,7 @@
                         <span class="cVal">{{end}}</span>
                     </div>
                 </div>
-                <div class="togC c-r"></div>
+                <div @click="toTogCity" class="togC c-r">转换</div>
             </div>
             <div class="date-s">
                 <div class='s-d'>
@@ -59,6 +59,11 @@
         }
       },
       methods: {
+        toTogCity () {
+          let str = this.start;
+          this.start = this.end;
+          this.end = str;
+        },
         searchBus () {
           console.log('us', this.busLine);
           this.getBusline({start: this.start, end: this.end});
@@ -82,6 +87,8 @@
                 .c-l,.c-r
                     flex: 1;
                     width: 20%;
+                .c-r
+                    line-height: 8rem;    
                 .c-l
                     flex: 5;
                     width: 80%;
@@ -92,6 +99,7 @@
                         height: 4rem;
                         line-height: 4rem;
                     .cLabel
+                        text-align: left;
                         width: 20%;   
                     .cVal
                         padding: 0 0.5rem;
@@ -99,6 +107,17 @@
                         font-size: 1.5rem;
                         width: 80%;
                         border-bottom: 1px solid #E8E8E8;
+            .s-d
+                display: flex;
+                span
+                    height: 4rem;
+                    line-height: 4rem;
+                    width: 20%;
+                    text-align: left;
+                .cVal
+                    width: 80%;
+                    text-align: left;                  
+                           
         .some-tips
             display: flex;
             .tip

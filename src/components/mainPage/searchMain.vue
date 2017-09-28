@@ -1,11 +1,11 @@
 <template>
 <div class='search-main'>
     <div class='search-head'>
-        <router-link v-for='link of links' :to='link.path' :key='link'>
+        <router-link v-for='link of links' :to='link.path' :key='link' @click="togContent(index)">
             {{link.name}}
         </router-link>
     </div>
-    <router-view class='search-view'></router-view>
+      <router-view class='search-view'></router-view>
 </div>
 </template>
 <script type="text/javascript">
@@ -18,10 +18,23 @@
             {name: '飞机票', path: 'plane'},
             {name: '汽车票', path: 'bus'},
             {name: '酒店', path: 'hotel'}
-          ]
+          ],
+          actIndex: '',
+          showVisible: true
         };
       },
+      watch: {
+        '$route.path': function (val) {
+          this.showVisible = !this.showVisible;
+          console.log('val', val);
+        }
+      },
       methods: {
+        togContent (index) {
+          alert();
+          console.log('是否正确', this.showVisible);
+          this.actIndex = index;
+        }
       },
       mounted: {
       }

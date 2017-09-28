@@ -4,7 +4,7 @@
             <header-top :title="result[0].startcity+'-'+result[0].endcity" baccolor="white" color="black"></header-top>
             <div class="head-bar">
                 <span class="filter" @click="showFilter = !showFilter">筛选</span>
-                <span class="go">下班就走</span>
+                <span  @click="outWork" class="go">下班就走</span>
                 <span class="direct">景区直达</span>
             </div>
         </div>
@@ -16,14 +16,14 @@
                     </div>
                     <div class="main">
                         <div>
-                            <mt-checklist :options="filters[activeTerm]" align="right" v-model="startstations">
+                            <mt-checklist :options="filters[activeTerm]" align="right" v-model="filtCondition[activeTerm]">
                             </mt-checklist>
                         </div>
                     </div>
                 </div>
                 <div class="bottom-wrap">
                     <div class="bottom">
-                        <span>清空</span>
+                        <span @click="clearAll" >清空</span>
                         <span @click="toFilter" class='to-filter'>筛选(共{{result.length}}班)</span>
                     </div>
                 </div>
@@ -37,8 +37,8 @@
                     <p>&nbsp</p>
                 </div>
                 <div class="bus-type">
-                    <p>出发:{{item.startstation}}</p>
-                    <p>到达:{{item.endstation}}</p>
+                    <p>{{item.startstation}}</p>
+                    <p>{{item.endstation}}</p>
                     <p class="type">{{item.bustype}}</p>
                 </div>
                 <div class="bus-price">
@@ -53,6 +53,7 @@
 <script type="text/javascript">
     import headerTop from '../common/header';
     import {mapActions, mapState} from 'vuex';
+    import {Toast} from 'mint-ui';
     export default {
       name: '',
       components: {
@@ -78,7 +79,14 @@
             'endSta': ['2'],
             'startTime': ['早上（00:00-06:00）', '上午(06:00 - 12:00)', '下午(12:00-18:00)', '晚上(18:00-24:00)'],
             'tickFilter': ['固定班']
-          }
+          },
+          filtCondition: {
+            'startSta': [],
+            'endSta': [],
+            'startTime': [],
+            'tickFilter': []
+          },
+          isOutWork: false
         };
       },
       watch: {
@@ -88,11 +96,63 @@
         }
       },
       methods: {
-        toFilter (startStation, endStation) {
-          alert('goog');
-          this.showFilter = !this.showFilter;
-          this.result = this.result.filter((item, index) => {
+        // 筛选条件清空
+        clearAll () {
+          for (let key in this.filtCondition) {
+            this.filtCondition[key] = [];
+          }
+        },
+        // 进行下班之后时间筛选
+        outWork () {
+          this.isOutWork = !this.isOutWork;
+          if (this.isOutWork) {
+            Toast({
+              message: '为您筛选16:00之后出发的车次',
+              position: 'bottom'
+            });
+            this.result = this.filterTime('16:00', '24:00');
+          } else {
+            this.result = this.busLine;
+          }
+        },
+        // 筛选时间，位于 timeS 与 timeE 之间的时间
+        filterTime (timeS, timeE) {
+          timeS = timeS.split(':')[0];
+          timeE = timeE.split(':')[0];
+          let newArr = [];
+          console.log('timeS', timeS);
+          console.log('timeE', timeE);
+          this.result.map((item, index) => {
+            if (item.starttime.split(':')[0] >= timeS && item.starttime.split(':')[0] < timeE) {
+              newArr.push(item);
+            }
           });
+          return newArr;
+        },
+        // 进行筛选条件函数
+        filterFn (filterArr, condition) {
+          let newArr = [];
+          this.result.map((item, index) => {
+            if (filterArr.indexOf(item['北京市' + condition]) > -1) {
+              console.log('item', item);
+              newArr.push(item);
+            }
+          });
+          console.log('到达这种地步');
+          return newArr;
+        },
+        // 筛选按钮, 点击进行筛选
+        toFilter (startStation, endStation) {
+          Toast({
+            message: '两个后端端口返回的值不一致, 没有进行筛选',
+            position: 'bottom'
+          });
+          this.showFilter = false;
+          console.log(this.filtCondition.startSta);
+          console.log('filterTime', this.filterTime('06:00', '18:00'));
+          // this.result = this.filterFn(this.filtCondition.startSta, 'startstation');
+          console.log('这是最好的解释');
+          console.log('追踪到了这里', this.result);
         },
         togFilter (pro) {
           this.activeTerm = pro;
@@ -119,7 +179,6 @@
       },
       mounted () {
         this.result = this.busLine;
-        console.log(this.busLine);
         this.getBussite({city: this.result[0].startcity});
         this.getBussite({city: this.result[0].endcity});
         this.allStartSite();
@@ -136,6 +195,7 @@
             .head-bar
                 display: flex;
                 width: 100%;
+                padding: 0.4rem 0;
                 span
                     height: 2rem;
                     line-height: 2rem;
