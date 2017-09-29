@@ -9,7 +9,7 @@
             </div>
         </div>
         <div class="content">
-            <mt-cell v-for="item in conData"  :title="item.title" icon="more"  :value="item.value" is-link></mt-cell>
+            <mt-cell v-for="item in conData"  :title="item.title" icon="more" :to="item.to" :value="item.value" is-link></mt-cell>
         </div>
     </div>
 </template>
@@ -23,7 +23,7 @@
             {title: '我的优惠券', label: '', value: '', to: '', icon: ''}
           ],
           conData: [
-            {title: '出行服务', value: '正晚点/时刻表', to: '', icon: ''},
+            {title: '出行服务', value: '正晚点/时刻表', to: '/trainTimeSearch', icon: ''},
             {title: '邀请好友', value: '一起来抢票', to: '', icon: ''},
             {title: '消息中心', value: '在线客服', to: '', icon: ''},
             {title: '产品意见', value: '', to: '', icon: ''},

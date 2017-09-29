@@ -99,7 +99,7 @@
         // 查看车次详细信息
         lineDetail (item) {
           this.setChoiceline(item);
-          this.$router.push('/');
+          this.$router.push('/lineDet');
         },
         // 筛选条件清空
         clearAll () {
