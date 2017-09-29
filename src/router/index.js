@@ -9,6 +9,7 @@ import PlaRes from '@/components/plane/plaResult';
 import Bus from '@/components/bus/bus';
 import BusRes from '@/components/bus/busResult';
 import LineDet from '@/components/bus/lineDet';
+import AddNew from '@/components/bus/addNew';
 import Hotel from '@/components/hotel/hotel';
 import HotRes from '@/components/hotel/hotResult';
 import AllCitys from '@/components/common/allCitys';
@@ -49,6 +50,8 @@ export default new Router({
     {path: '/plaRes', name: 'plaRes', component: PlaRes},
     {path: '/hotRes', name: 'hotRes', component: HotRes},
     {path: '/busRes', name: 'busRes', component: BusRes},
+    // 汽车票乘客新镇
+    {path: '/addNew', name: 'addNew', component: AddNew},
     {path: '/grabDet', name: 'grabDet', component: GrabDet},
     {path: '/watchSet', name: 'watchSet', component: WatchSet},
     {path: '/siteTys', name: 'siteTys', component: SiteTys},

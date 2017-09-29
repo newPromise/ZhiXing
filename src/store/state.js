@@ -41,6 +41,12 @@ let state = {
     endstation: '',
     starttime: '',
     price: ''
+  },
+  busPassenger: {
+    name: '',
+    type: '',
+    paperTy: '',
+    paperNo: ''
   }
 };
 

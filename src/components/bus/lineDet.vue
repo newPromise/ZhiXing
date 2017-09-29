@@ -36,7 +36,7 @@
                     </div>
                 </div>
                 <div class="add-passenger">
-                    <a @click="showAddnew = true">添加乘客</a>
+                    <a @click="$router.push('/addNew')">添加乘客</a>
                 </div>
             </div>
             <div class="ticket-get">
@@ -85,9 +85,6 @@
             <div class="pop" @click="instrucPop = false">
                 <p>这里是订票说明</p>
             </div>
-        </mt-popup>
-        <mt-popup v-model="showAddnew" position="right">
-            <div class='add-new'>天机新的</div>
         </mt-popup>
     </div>
 </template>
