@@ -1,7 +1,6 @@
 <template>
   <div id="app">
     <router-view class='main-view'></router-view>
-    <bottom-bar v-if=""></bottom-bar>
   </div>
 </template>
 <script>

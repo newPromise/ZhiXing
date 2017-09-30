@@ -42,12 +42,10 @@ let state = {
     starttime: '',
     price: ''
   },
-  busPassenger: {
-    name: '',
-    type: '',
-    paperTy: '',
-    paperNo: ''
-  }
+  // 添加的所有乘客
+  busPassenger: [],
+  // 要进行乘车的乘客
+  choicePassenger: []
 };
 
 export {state};

@@ -25,12 +25,12 @@
                 <mt-cell  title='备选车次 可退票' is-link></mt-cell>
             </div>
             <div class="passenger">
-                <div class="passenger-msg">
+                <div class="passenger-msg" v-for="item of busPassenger" v-if="item.isPassenger === true">
                     <div class="del-show">del</div>
                     <div class="pass-msg">
                         <div class="per-msg">
-                            <p>张宁宁  <span>成人票</span></p>
-                            <p>2370921199507092414</p>
+                            <p>{{item.name}}  <span>{{item.type}}</span></p>
+                            <p>{{item.paperNo}}</p>
                         </div>
                         <div v-show="false"  class='per-del'>删除</div>
                     </div>
@@ -59,14 +59,14 @@
             </div>
             <div class="one-free">
                 <mt-cell title="1元免票" label="中奖免票款,天天开奖" >
-                    <div name="value">goodgfds</div>
+                    <div name="value"><mt-switch v-model="isOnefree"></mt-switch></div>
                 </mt-cell>
             </div>
-            <div class="assurance">
+            <div class="assurance" @click="showSomeInsur = true">
                 <mt-cell title="有机会免费获赠保险">
                     <div name="value">保险</div>
                 </mt-cell>
-                <mt-cell title="不需要附加产品" is-link></mt-cell>
+                <mt-cell  title="不需要附加产品" is-link></mt-cell>
             </div>
             <div class="coupon">
                 <mt-cell title="选择优惠券" value="无可用优惠券"  is-link></mt-cell>
@@ -78,12 +78,27 @@
             </div>
         </div>
         <div class="det-footer">
-            <div class="show-price">{{choiceLine.price}}</div>
+            <div class="show-price">￥{{!isOnefree ? choiceLine.price : Number(choiceLine.price) + 1 }}</div>
             <div class="to-order">立即预订</div>
         </div>
         <mt-popup v-model="instrucPop" position="bottom" @click="instrucPop = false">
             <div class="pop" @click="instrucPop = false">
                 <p>这里是订票说明</p>
+            </div>
+        </mt-popup>
+        <mt-popup v-model="showSomeInsur" position = "right">
+            <div class="insurance">
+                <header-top baccolor="white" color="black" title="服务类型"  hasRight>
+                    <div slot="right">
+                        <span>确定</span>
+                    </div>
+                </header-top>
+                <div class="insurance-con">
+                    <div class="insurance-choices" v-for="item,index of allInsur">
+                        <mt-radio v-model="value"  :options="[item.name+'  '+ `${item.money}元/份`]"></mt-radio>
+                        <mt-cell title="推荐选择, 安全出行, 最高保险23万" v-if="index !== 2"></mt-cell>
+                    </div>
+                </div>
             </div>
         </mt-popup>
     </div>
@@ -96,14 +111,31 @@
       data () {
         return {
           instrucPop: false,
-          showAddnew: false
+          showAddnew: false,
+          isOnefree: false,
+          showSomeInsur: false,
+          allInsur: [
+            {
+              name: '汽车乘意险',
+              money: '5',
+              insurMon: 10
+            },
+            {
+              name: '汽车乘意险',
+              money: '10',
+              insurMon: 25
+            },
+            {
+              name: '不需要任何附加产品'
+            }
+          ]
         };
       },
       components: {
         headerTop
       },
       computed: {
-        ...mapState(['choiceLine'])
+        ...mapState(['choiceLine', 'busPassenger'])
       },
       methods: {
         getInstruc () {
@@ -228,6 +260,17 @@
                 color: #5495E6;               
         .add-new
             width: 100%;
-            height: 100%;       
+            height: 100%;
+        .mint-popup-right
+            background:#F4F4F4
+            width: 100%;
+            height: 100%;
+            .insurance
+                .insurance-con
+                    padding: 1rem;
+                    .insurance-choices
+                        background: white;
+                        >.mint-cell:last-child
+                            padding: 0 1rem;           
                             
 </style>

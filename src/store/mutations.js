@@ -56,6 +56,10 @@ const mutations = {
     state.choiceLine.endstation = endstation;
     state.choiceLine.starttime = starttime;
     state.choiceLine.price = price;
+  },
+  setBuspassenger (state, { name, type, paperTy, paperNo }, isPassenger = false) {
+    let obj = {name: name, type: type, paperTy: paperTy, paperNo: paperNo, isPassenger: isPassenger};
+    state.busPassenger.push(obj);
   }
 };
 export { mutations };

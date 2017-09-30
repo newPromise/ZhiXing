@@ -8,9 +8,11 @@
     <transition name="slide">
       <router-view class='search-view'></router-view>
     </transition>
+    <bottom-bar v-if=""></bottom-bar>
 </div>
 </template>
 <script type="text/javascript">
+    import bottomBar from '@/components/common/bottomBar';
     export default {
       name: 'searchMain',
       data () {
@@ -24,6 +26,9 @@
           actIndex: '',
           showVisible: true
         };
+      },
+      components: {
+        bottomBar
       },
       watch: {
         '$route.path': function (val) {

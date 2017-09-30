@@ -122,6 +122,10 @@ const actions = {
   },
   setChoiceline: ({commit}, newVal) => {
     commit('setChoiceline', newVal);
+  },
+  setPassenger: ({commit}, newVal) => {
+    console.log('newVal', newVal);
+    commit('setBuspassenger', newVal);
   }
 };
 
