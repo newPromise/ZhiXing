@@ -26,7 +26,8 @@
           type: String
         },
         title: {
-          type: String
+          type: String,
+          default: 'ds'
         },
         baccolor: {
           type: String,

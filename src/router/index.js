@@ -10,6 +10,7 @@ import Bus from '@/components/bus/bus';
 import BusRes from '@/components/bus/busResult';
 import LineDet from '@/components/bus/lineDet';
 import AddNew from '@/components/bus/addNew';
+import OrderDetail from '@/components/bus/orderDetail';
 import Hotel from '@/components/hotel/hotel';
 import HotRes from '@/components/hotel/hotResult';
 import AllCitys from '@/components/common/allCitys';
@@ -37,10 +38,10 @@ export default new Router({
       path: '/searchMain',
       component: SearchMain,
       children: [
-            {path: 'train', name: 'train', component: Train},
-            {path: 'plane', name: 'plane', component: Plane},
-            {path: 'bus', name: 'bus', component: Bus},
-            {path: 'hotel', name: 'hotel', component: Hotel}
+            {path: '/train', name: 'train', component: Train},
+            {path: '/plane', name: 'plane', component: Plane},
+            {path: '/bus', name: 'bus', component: Bus},
+            {path: '/hotel', name: 'hotel', component: Hotel}
       ]},
     {path: '/orderIndex', name: 'orderIndex', component: OrderIndex},
     {path: '/allCitys', name: 'allCitys', component: AllCitys},
@@ -68,7 +69,9 @@ export default new Router({
     // 正晚点查询 车次结果
     {path: '/trainno', name: 'trainno', component: TrainNo},
     // 车次详细信息
-    {path: '/lineDet', name: 'lineDet', component: LineDet}
+    {path: '/lineDet', name: 'lineDet', component: LineDet},
+    // 生成订单
+    {path: '/orderDetail', name: 'orderDetail', component: OrderDetail}
 
   ]
 });

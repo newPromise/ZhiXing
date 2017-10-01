@@ -42,24 +42,29 @@ const mutations = {
   getBussite (state, newVal) {
     state.busSite = newVal;
   },
-  setChoiceline (state, {
-    date, distance, startcity, endcity,
-    startstation,
-    endstation,
-    starttime,
-    price}) {
-    state.choiceLine.date = date;
-    state.choiceLine.distance = distance;
-    state.choiceLine.startcity = startcity;
-    state.choiceLine.endcity = endcity;
-    state.choiceLine.startstation = startstation;
-    state.choiceLine.endstation = endstation;
-    state.choiceLine.starttime = starttime;
-    state.choiceLine.price = price;
+  setChoiceline (state, obj) {
+    state.choiceLine = obj;
+    console.log('被选中的车次', state.choiceLine);
   },
   setBuspassenger (state, { name, type, paperTy, paperNo }, isPassenger = false) {
     let obj = {name: name, type: type, paperTy: paperTy, paperNo: paperNo, isPassenger: isPassenger};
     state.busPassenger.push(obj);
+  },
+  // 设置汽车的订单
+  setBusorder (state, obj) {
+    state.busOrder = obj;
+  },
+  // 用于存放汽车的所有订单
+  setBusallorders (state, obj) {
+    state.busAllorders.push(obj);
+  },
+  // 用于清除订单
+  delBusallorders (state, obj) {
+    state.busAllorders.map((item, index) => {
+      if (item === obj) {
+        state.busAllorders.splice(index, 1);
+      }
+    });
   }
 };
 export { mutations };

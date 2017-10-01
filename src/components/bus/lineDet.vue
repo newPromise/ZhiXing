@@ -122,6 +122,7 @@
           isOnefree: false,
           showSomeInsur: false,
           choiceInsur: '不需要任何附加产品',
+          insurancePrice: '',
           allInsur: [
             {
               name: '汽车乘意险  5元/人',
@@ -153,6 +154,7 @@
           this.choiceLine.price = (!this.isOnefree ? this.choiceLine.price : Number(this.choiceLine.price) + 1);
           this.allInsur.map((item, index) => {
             if (item.name === this.choiceInsur) {
+              this.insurancePrice = item.money;
               console.log('得到的item', item.money, this.choiceLine.price);
               this.choiceLine.price = Number(this.choiceLine.price) + item.money;
             }
@@ -162,6 +164,10 @@
         ...mapState(['choiceLine', 'busPassenger'])
       },
       methods: {
+        /**
+         * 用于存放订单信息，并且将订单的信息放到所有订单中
+         * @return {[type]} [description]
+         */
         orderNow () {
           if (this.phone === '') {
             Toast({
@@ -170,17 +176,29 @@
             });
           };
           let ver = this.vertify({name: 'phone', value: this.phone});
+          console.log(ver);
           if (ver) {
             console.log('dsf');
+            let datas = {
+              phone: this.phone,
+              price: '',
+              servicePrice: 5,
+              busPrice: this.choiceLine.price,
+              insurancePrice: this.insurancePrice
+            };
+            datas.price = this.choiceLine.price + 5;
+            this.$router.push('/orderDetail');
+            this.setBusorder({...this.choiceLine, ...datas});
+            this.setBusallorders({...this.choiceLine, ...datas});
+            this.$router.push('/orderDetail');
           };
         },
         getInstruc () {
           this.instrucPop = true;
         },
-        ...mapActions(['setBusPassenger'])
+        ...mapActions(['setBusPassenger', 'setBusallorders', 'setBusorder'])
       },
       mounted () {
-        console.log('得到被选中的车次', this.choiceLine);
       }
     };
 </script>

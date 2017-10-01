@@ -126,6 +126,16 @@ const actions = {
   setPassenger: ({commit}, newVal) => {
     console.log('newVal', newVal);
     commit('setBuspassenger', newVal);
+  },
+  // 设置汽车订单
+  setBusorder: ({commit}, newVal) => {
+    commit('setBusorder', newVal);
+  },
+  setBusallorders: ({commit}, newVal) => {
+    commit('setBusallorders', newVal);
+  },
+  delBusallorders: ({commit}, newVal) => {
+    commit('delBusallorders', newVal);
   }
 };
 

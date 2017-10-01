@@ -45,7 +45,11 @@ let state = {
   // 添加的所有乘客
   busPassenger: [],
   // 要进行乘车的乘客
-  choicePassenger: []
+  choicePassenger: [],
+  // busOrder, 汽车订单
+  busOrder: {},
+  // 汽车所有订单
+  busAllorders: []
 };
 
 export {state};
