@@ -77,7 +77,7 @@
       }
     };
 </script>
-<style type="text/css" lang="stylus">
+<style type="text/css" lang="stylus" scoped>
     .mint-checklist
         text-align: left;
 </style>

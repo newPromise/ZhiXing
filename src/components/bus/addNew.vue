@@ -121,7 +121,7 @@
       }
     };
 </script>
-<style type="text/css" lang="stylus" >
+<style type="text/css" lang="stylus" scoped>
     .addNew
         .add
             width: 100%;

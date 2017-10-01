@@ -8,7 +8,7 @@
         </div>
         <div class='sec-line'>
             <span>前一天</span>
-            <span>时间</span>
+            <span>{{selDate.month}}月{{selDate.day}}</span>
             <span @click="dateChange(true)">后一天</span>
         </div>
         <div class='res-type'>
@@ -31,7 +31,7 @@
                         </div>
                         <div>
                             <p class='area'>
-                                <span class='timeArea'>{{item.costtime | toHour}}</span>
+                                <span class='timeArea'>{{item.costtime}}</span>
                                 <span class='line'></span>
                                 <span class='trainNo'>{{item.trainno}}</span>
                             </p>
@@ -45,9 +45,10 @@
                         </div>
                     </div>
                     <div class='site'>
-                        <p v-if="item.tainno.slice(0,1) === 'K'">
+
+                        <p v-if="item.trainno.slice(0,1) === 'K'">
                             <span>硬座:{{showPrice ? ticketPrice(item.station, item.endstation, item.trainno) : item.yz}}</span>
-                            <span>硬卧:{{showPrice ? ticketPrice(item.station, item.endstation, item.trainno) : item.yw}}</span>
+                            <span>硬卧:{{showPrice ? ticketPrice(item.trainno) : item.yw}}</span>
                             <span>软卧:{{showPrice ? ticketPrice(item.station, item.endstation, item.trainno) : item.rw}}</span>
                             <span>无座:{{showPrice ? ticketPrice(item.station, item.endstation, item.trainno) : item.wz}}</span>
                         </p>
@@ -56,6 +57,7 @@
                             <span>二等座:{{showPrice ? ticketPrice(item.station, item.endstation, item.trainno) : item.ed}}</span>
                             <span>无座:{{showPrice ? ticketPrice(item.station, item.endstation, item.trainno) : item.wz}}</span>
                         </p>
+                      
                     </div>
                 </div>
             </div>
@@ -182,7 +184,12 @@
         }
       },
       computed: {
-        ...mapState(['ticketRes'])
+        ticketPrice (lineno) {
+          // this.getLineRes({trainno: lineno});
+          console.log('车次信息', this.lineRes);
+          return this.lineRes;
+        },
+        ...mapState(['ticketRes', 'lineRes', 'selDate', 'stationRes'])
       },
       methods: {
         filterType (time) {
@@ -206,7 +213,7 @@
         },
         // 余票价格查询
         getResult () {
-          this.getTicketRes({start: '北京', end: '上海', date: '2017-09-26'});
+          this.getTicketRes({start: '北京', end: '上海', date: '2017-10-5'});
         },
         // 余票查询
         getResiduSite () {
@@ -214,32 +221,17 @@
         // 站站票价查询, 用来查询票价
         // station: 开始车站， endStation: 结束车站, traninNo: 车次
         // 通过车站信息以及车次查找到对应车次的车票信息
-        ticketPrice (station, endStation, trainNo) {
-          let obj = {url: 'api/train/station2s'};
-          obj.params = {
-            appkey: '3cf7ad9107df44c9',
-            appsecret: '7Iq25fL9BuX6xiNoMnTcQ85TAD8IrZEW',
-            start: station,
-            end: endStation
-          };
-          obj.success = res => {
-            let result = res;
-            for (let item of result) {
-              if (item.trainno === trainNo) {
-                return item;
-              }
-            }
-          };
-          this.$get(obj);
-        },
-        ...mapActions(['setStationRes', 'setLineRes', 'getTicketRes'])
+        ...mapActions(['setStationRes', 'getTicketRes', 'setLineRes', 'getStationRes', 'getLineRes'])
       },
       mounted () {
-        this.getResult();
+        // this.getResult();
+        setTimeout(function () {
+          console.log('res', this.stationRes);
+        }, 10);
       }
     };
 </script>
-<style  lang='stylus'>
+<style  lang='stylus' scoped>
     .active
         display: inline-block;
         height: 2rem;
@@ -254,7 +246,10 @@
         top: 0;
         left: 0;
         width:100%;
-        background-color: #5495E6;  
+        background-color: #5495E6;
+    .res-body
+        margin-top: 7rem;
+        margin-bottom: 4rem;      
     .tra-res
         .sec-line
             padding: 1rem;
@@ -292,10 +287,20 @@
             div
                 flex: 1;
                 width: 25%;
+                .time
+                  span
+                    font-size: 1.5rem;
+                .start
+                    color: #5495E6;  
+                .fare
+                  color: #FFFEFE;
+                  font-size: 1.5rem;     
+                          
+                  
                 p
                     line-height: 2rem;
                     text-align: center;
-                    height: 2rem;;
+                    height: 2rem;
                 .area
                     >span
                         display: block;

@@ -2,18 +2,14 @@
     <div class='all-citys'>
         <div class='city-head'>
             <div class='head-act'>
-                <div class='back' @click='goBack()' ><span>上一级</span></div>
-                <div class='tip'>
-                    <span >出发站</span>
-                    <span >到达站</span>
-                </div>
-                <div class='ensure' @click='ensure()'>
-                    <span>确定</span>
-                </div>
+               <header-top :title="title"  hasRight>
+                 <div slot="right">
+                   <span>确定</span>
+                 </div>
+               </header-top>
             </div>
             <div class='city-input'>
-                <input ref='sta' id='start' @blur='togInput($event)' v-model='startCity'  class='start-city' >
-                <input ref='end' id='end' @blur='togInput($event)' v-model='endCity' class='end-city'>
+                <input ref='sta'  :class="{'active': inputTy === 's'}" id='start' @click='togInput($event)' v-model='startCity'  class='start-city' ><input ref='end'  :class="{'active': inputTy === 'e'}" id='end' @click='togInput($event)' v-model='endCity' class='end-city'>
             </div>
         </div>
         <div class='city-body'>
@@ -26,14 +22,16 @@
 </template>
 <script>
     // 通过使用  vuex 语法将状态进行集中管理
+    import headerTop from './header';
     import { mapActions, mapState } from 'vuex';
     export default {
       name: 'allCitys',
       data () {
         return {
+          title: '出发站',
           citys: [],
           selCity: '',
-          inputTy: '',
+          inputTy: 's',
           startCity: '',
           endCity: '',
           // lastPath 用来进行保存上级路由的地址
@@ -42,6 +40,9 @@
       },
       computed: {
         ...mapState(['city'])
+      },
+      components: {
+        headerTop
       },
       methods: {
         ensure () {
@@ -62,10 +63,12 @@
           if (this.inputTy === 's') {
             this.startCity = event.target.innerHTML;
             this.$refs.end.focus();
+            this.inputTy = 'e';
           } else {
             this.endCity = event.target.innerHTML;
             if (this.startCity === '') {
               this.$refs.sta.focus();
+              this.inputTy = 's';
             } else {
               this.setCity({startCity: this.startCity, endCity: this.endCity});
               this.goBack();
@@ -77,9 +80,11 @@
           switch (event.id) {
             case 'start':
               this.inputTy = 's';
+              this.title = '出发站';
               break;
             case 'end':
               this.inputTy = 'e';
+              this.title = '到达站';
               break;
           }
         },
@@ -125,7 +130,7 @@
       }
     };
 </script>
-<style type="text/css" lang='stylus'>
+<style type="text/css" lang='stylus' scoped>
 .all-citys
     padding: 0;
     .city-head
@@ -135,25 +140,20 @@
         right: 0;
         background-color: skyblue;
         height: 6rem;
-        .head-act
-            height: 50%;
-            display: flex;
-            align-items: middle;
-            div
-                flex: 1;
-                display: table-cell;
-                  
-            .tip
-                flex: 3
         .city-input
-            margin: 0.5rem;
+            padding: 1rem;
+            width: 100%;
+            background: #5495E6;
             input
-              width: 5rem;  
-              height: 2.2rem;
-              &:hover 
-                width: 8rem;
+              height: 2.6rem;
+              border-radius: 3px;
+              padding: 1rem;
+              width: 30%;
+              margin-right: 1rem;
+            .active
+              width: 60%;  
     .city-list,.letterBar
-        margin-top: 6rem;
+        margin-top: 8rem;
         .city
            background-color: white;
            font-size: 1.5rem; 

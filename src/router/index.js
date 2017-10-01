@@ -38,10 +38,10 @@ export default new Router({
       path: '/searchMain',
       component: SearchMain,
       children: [
-            {path: '/train', name: 'train', component: Train},
-            {path: '/plane', name: 'plane', component: Plane},
-            {path: '/bus', name: 'bus', component: Bus},
-            {path: '/hotel', name: 'hotel', component: Hotel}
+            {path: 'train', name: 'train', component: Train},
+            {path: 'plane', name: 'plane', component: Plane},
+            {path: 'bus', name: 'bus', component: Bus},
+            {path: 'hotel', name: 'hotel', component: Hotel}
       ]},
     {path: '/orderIndex', name: 'orderIndex', component: OrderIndex},
     {path: '/allCitys', name: 'allCitys', component: AllCitys},

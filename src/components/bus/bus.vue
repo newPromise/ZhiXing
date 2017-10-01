@@ -5,19 +5,19 @@
                 <div class="c-l">
                     <div class="s-c">
                         <span class="cLabel">出发城市</span>
-                        <span class="cVal">{{start}}</span>
+                        <span class="cVal" @click="$router.push('/allCitys')">{{$parent.$data.citys.startCity}}</span>
                     </div>
                     <div class="e-c">
                         <span class="cLabel">到达城市</span>
-                        <span class="cVal">{{end}}</span>
+                        <span class="cVal" @click="$router.push('/allCitys')">{{$parent.$data.citys.endCity}}</span>
                     </div>
                 </div>
-                <div @click="toTogCity" class="togC c-r">转换</div>
+                <div @click="toTogCity()" class="togC c-r">转换</div>
             </div>
             <div class="date-s">
                 <div class='s-d'>
                     <span class="cLabel">出发日期</span>
-                    <span class="cVal">上海</span>
+                    <span class="cVal" @click="$router.push('/Calender')">{{$parent.$data.date.month}}月{{$parent.$data.date.day}}日</span>
                 </div>
             </div>
             <div class="search">
@@ -38,8 +38,8 @@
       name: 'bus',
       data () {
         return {
-          start: '北京',
-          end: '天津',
+          startCity: '北京',
+          endCity: '天津',
           tips: [
             {icon: '', title: '火车票'},
             {icon: '', title: '机场巴士'},
@@ -49,6 +49,11 @@
         };
       },
       computed: {
+        getCity () {
+          this.startCity = this.$parent.$data.citys.startCity;
+          this.endCity = this.$parent.$data.citys.endCity;
+          return this.startCity;
+        },
         ...mapState(['busLine'])
       },
       watch: {
@@ -60,9 +65,7 @@
       },
       methods: {
         toTogCity () {
-          let str = this.start;
-          this.start = this.end;
-          this.end = str;
+          [this.$parent.$data.citys.startCity, this.$parent.$data.citys.endCity] = [ this.$parent.$data.citys.endCity, this.$parent.$data.citys.startCity ];
         },
         searchBus () {
           console.log('us', this.busLine);
@@ -74,7 +77,7 @@
       }
     };
 </script>
-<style type="text/css" lang="stylus">
+<style type="text/css" lang="stylus" scoped>
     .bus
         padding: 0；
         .search-list, .some-tips

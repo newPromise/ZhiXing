@@ -29,6 +29,7 @@ const mutations = {
   },
   getStationRes (state, newVal) {
     state.stationRes = newVal;
+    console.log('我被存上了', newVal);
   },
   getLineRes (state, newVal) {
     state.lineRes = newVal;

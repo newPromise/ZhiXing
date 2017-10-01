@@ -151,7 +151,7 @@
       }
     };
 </script>
-<style type="text/css" lang="stylus">
+<style type="text/css" lang="stylus" scoped>
     .watch-set
         >div
             background-color: white;

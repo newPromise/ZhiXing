@@ -6,10 +6,11 @@
         <span class='endCity' @click='choiceCity()'>{{city.endCity}}</span>
     </div>
     <div class='choice-date choice'>
-        <span class='date' @click="$router.push({name: 'calender', params: {id: '123'}})">{{selDate.month + 1}}月{{selDate.day}}</span>
+        <span class='date' >{{selDate.month}}月{{selDate.day}}</span>
     </div>
     <div class='choice-sty choice'>
         <span class='isHigh'>高铁动车<input type='checkbox' v-model='ishigh'></span>
+        <span class="isStudent">学生票<input type="checkbox" v-model="isStudent"></span>
     </div>
     <div class='search'>
         <button class='searchBtn'  @click="$router.push('/trainRes')">查询</button>
@@ -48,24 +49,25 @@
 </script>
 <style type='text/style' rel='styleSheet' lang='stylus'>
     .train-search
-        span
-            display: inline-block;
-            line-height: 3rem;
-            height: 3rem;
+        background: white;
+        padding: 1rem;
         .choice-city,.choice-date
             width: 100%;
-            border-bottom: 1px solid  #EEACAC;
-        .choice-city
+        .choice-city,.choice-date,.choice-sty
             display: flex;
+            height: 4rem;
             span
                 font-size: 20px;
-                width: 32%;
+                line-height: 4rem;
                 flex: 1;
+            .startCity, .endCity
+                border-bottom: 1px solid lightgray;    
             .startCity
                 text-align: left;
             .endCity
                 text-align: right;
         .choice-date
+            border-bottom: 1px solid lightgray;
             span
                 width: 100%;
                 text-align: left;
@@ -73,12 +75,18 @@
             display: flex;
             justify-content: space-around;
             span
+                font-size: 1.5rem;
+                margin-right: 1rem;
                 flex: 1;
                 display: inline-block;
                 width: 100%;
                 text-align: right;
                 &:first-child
                     text-align: left;
+                input
+                    margin-left: 1rem;    
+            .isStudent
+                text-align: right;        
        
                                       
 </style>

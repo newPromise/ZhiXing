@@ -27,7 +27,7 @@
       }
 };
 </script>
-<style   rel='styleSheet' lang='stylus'>
+<style   rel='styleSheet' lang='stylus' scoped>
     .bottom-bar
         .bot-nav
           background: white;

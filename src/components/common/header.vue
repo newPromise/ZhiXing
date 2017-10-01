@@ -53,7 +53,7 @@
       }
     };
 </script>
-<style type="text/css" lang="stylus">
+<style type="text/css" lang="stylus" scoped>
 .common-header
     .header
         position: fixed;

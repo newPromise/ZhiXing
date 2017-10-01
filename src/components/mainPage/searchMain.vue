@@ -13,6 +13,7 @@
 </template>
 <script type="text/javascript">
     import bottomBar from '@/components/common/bottomBar';
+    import {mapState} from 'vuex';
     export default {
       name: 'searchMain',
       data () {
@@ -24,8 +25,13 @@
             {name: '酒店', path: 'hotel'}
           ],
           actIndex: '',
-          showVisible: true
+          showVisible: true,
+          citys: '',
+          date: ''
         };
+      },
+      computed: {
+        ...mapState(['city', 'selDate'])
       },
       components: {
         bottomBar
@@ -43,7 +49,9 @@
           this.actIndex = index;
         }
       },
-      mounted: {
+      mounted () {
+        this.citys = this.city;
+        this.date = this.selDate;
       }
     };
 </script>

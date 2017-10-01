@@ -190,7 +190,7 @@
       }
     };
 </script>
-<style type="text/css" lang="stylus">
+<style type="text/css" lang="stylus" scoped>
     .busRes
         .bus-header
             width: 100%;

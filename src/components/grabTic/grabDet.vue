@@ -77,7 +77,7 @@
       }
     };
 </script>
-<style type="text/css" lang="stylus">
+<style type="text/css" lang="stylus" scoped>
     .grabDet
         .grab-header
             padding: 1rem;

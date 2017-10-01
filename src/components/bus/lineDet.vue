@@ -214,7 +214,7 @@
       }
     };
 </script>
-<style type="text/css" lang="stylus">
+<style type="text/css" lang="stylus" scoped>
     .lineDet
         .det-header
             padding-bottom: 1rem;

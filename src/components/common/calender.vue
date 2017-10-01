@@ -16,7 +16,7 @@
                 </div>
                 <div class='mon-body'>
                     <span class='blank-day' v-for='day in mon.blankDate' >{{}}</span>
-                    <span class='day' :class="[((new Date().getDate() > day && new Date().getMonth() === mon.month)) ? ('overDate') : ((activeDay === day && activeMon === mon.month) ? 'selected' : '' )]" @click='selectDay(day, mon.month)' v-for='day in mon.dayNums'>{{day}}</span>
+                    <span class='day' :class="[((new Date().getDate() > day && new Date().getMonth() + 1 === mon.month)) ? ('overDate') : ((activeDay === day && activeMon === mon.month) ? 'selected' : '' )]" @click='selectDay(day, mon.month)' v-for='day in mon.dayNums'>{{day}}</span>
                 </div>
             </div>
         </div>
@@ -62,9 +62,16 @@
         goBack () {
           this.$router.push(this.lastPath);
         },
+        /**
+         * [selectDay description]
+         * @param  {[String]} day   [被选中的日]
+         * @param  {[String} month [被选中的月份]
+         * @return {[type]}       [description]
+         */
         selectDay (day, month) {
           this.activeDay = day;
           this.activeMon = month;
+          console.log('被选中的月 日', day, month + 1);
           let timer = setTimeout(() => {
             this.setDate({month: this.activeMon + 1, day: this.activeDay});
             this.goBack();
@@ -72,6 +79,14 @@
           }, 1000);
           timer;
         },
+        /**
+         * [pushMon description]
+         * @param  {[number]} year      [年份]
+         * @param  {[number]} month     [月份]
+         * @param  {[number]} dayNums   [当前月份的所有天数]
+         * @param  {[number]} blankDate [第一天前面的天数]
+         * @return {[type]}           [description]
+         */
         pushMon (year, month, dayNums, blankDate) {
           let obj = {};
           // 想使用 ...arguments 的语法进行求解，求解错误
@@ -88,7 +103,7 @@
           for (let i = 0; i < 3; i++) {
             let first = new Date(this.year, this.month, 1);
             console.log('first', first.getDay());
-            this.dayNums = new Date(this.year, this.month, 0).getDate();
+            this.dayNums = new Date(this.year, this.month + 1, 0).getDate();
             this.blankDate = first.getDay();
             this.pushMon(this.year, this.month, this.dayNums, this.blankDate);
             if (this.month === 11) {
@@ -108,7 +123,7 @@
       }
     };
 </script>
-<style type="text/css" lang='stylus'>
+<style type="text/css" lang='stylus' scoped>
     .calender
         background-color: #EEE2E2;
         .top
@@ -141,7 +156,7 @@
             margin-top: 6rem;
             background: white;
             text-align: left;
-            padding-left: 2rem;
+            padding:  0 1rem;
             .mon
                 position: relative;
             .mon-line
@@ -178,15 +193,16 @@
                 width: 100%;
                 span
                     display: inline-block;
-                    width: 14%;
+                    width: 3rem;
                     height: 3rem;
                     line-height: @height;
                     border-radius: 100%;
                     font-size: 1rem;
+                    text-align: center;
                 .blank-day
                     color: transparent;    
                 .selected
-                    background-color: #696CEE;
+                    background-color: #5495E6;
                     color: white;    
                 .overDate
                     color: #939090;                
