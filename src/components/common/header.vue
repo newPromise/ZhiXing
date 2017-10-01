@@ -3,7 +3,7 @@
     <div class="header" :style="{background: baccolor, color: color}">
         <div class="left">
             <slot name="left">
-                <span @click="$router.go(-1)">返回</span>
+                <span @click="$router.go(-1)"><i class="iconfont icon-jiantou-copy-copy1"></i></span>
             </slot>
         </div>
         <div class="title">

@@ -15,7 +15,9 @@
           北京
         </span>
       </div>
-      <div class="togIcon c-m"></div>
+      <div class="togIcon c-m">
+        <span><i class="iconfont icon-zhuanhuan1"></i></span>
+      </div>
       <div class="c-r">
         <span class="e-c">
           上海
@@ -31,6 +33,7 @@
       <div class="c-m"></div>
       <div class="c-r">
         <span class="e-c">
+          <i class="iconfont icon-jia"></i>
           返程日期
         </span>
       </div>
@@ -51,6 +54,7 @@
     </div>
     <div class="some-tip">
       <div class="tip" v-for="lb of tipLabel">
+        <i class="iconfont" :class="lb.icon"></i><br>
         <span>{{lb.title}}</span>
       </div>
     </div>
@@ -85,10 +89,10 @@
       data () {
         return {
           tipLabel: [
-          {icon: '', title: '在线选座'},
-          {icon: '', title: '航班动态'},
-          {icon: '', title: '特价机票'},
-          {icon: '', title: '乘机指南'}
+          {icon: 'icon-zaixianxuanzuo-copy', title: '在线选座'},
+          {icon: 'icon-dongtai', title: '航班动态'},
+          {icon: 'icon-youhuiquan1', title: '特价机票'},
+          {icon: 'icon-zhinan', title: '乘机指南'}
           ],
           value: ''
         };
@@ -145,6 +149,9 @@
       .tip
         flex: 1;
         text-align: center;
+        i
+          font-size: 1.5rem;
+          color: #67B8F7;
     .spec-sale
       .sale-tit
         text-align: left;
@@ -177,7 +184,11 @@
       width: 49%;
   .mint-checkbox-core
       border-radius: 5px !important;
-      border: 2px solid skyblue !important; 
+      border: 2px solid skyblue !important;
+  .iconfont
+    font-size: 2rem;
+  .icon-jia
+    font-size: 1.2rem;       
                 
               
                              

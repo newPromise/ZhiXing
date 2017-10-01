@@ -5,6 +5,7 @@
         </div>
         <div class="topnav">
             <div class="nav-list" v-for="item of navLabel">
+                <i class="iconfont" :class="item.icon"></i><br>
                 <span>{{item.title}}</span>
             </div>
         </div>
@@ -19,10 +20,10 @@
       data () {
         return {
           navLabel: [
-          {icon: '', title: '火车票'},
-          {icon: '', title: '机票'},
-          {icon: '', title: '汽车票'},
-          {icon: '', title: '酒店'}
+          {icon: 'icon-huoche', title: '火车票'},
+          {icon: 'icon-hangban', title: '机票'},
+          {icon: 'icon-my-', title: '汽车票'},
+          {icon: 'icon-jiudian1', title: '酒店'}
           ],
           orders: [
           {title: '用户订单', route: ''},
@@ -51,8 +52,11 @@
             .nav-list
                 width: 25%;
                 height: 4rem;
-                line-height: 4rem;
+                line-height: 2rem;
                 float: left;
+                .iconfont
+                  color: #67B8F7;
+                  font-size: 2rem;
         .mint-cell-title
             text-align: left !important;        
 </style>

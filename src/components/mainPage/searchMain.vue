@@ -2,6 +2,7 @@
 <div class='search-main'>
     <div class='search-head'>
         <router-link v-for='link of links' :to='link.path' :key='link' @click="togContent(index)">
+            <i class="iconfont" :class="link.icon"></i>
             {{link.name}}
         </router-link>
     </div>
@@ -19,10 +20,10 @@
       data () {
         return {
           links: [
-            {name: '火车票', path: 'train'},
-            {name: '飞机票', path: 'plane'},
-            {name: '汽车票', path: 'bus'},
-            {name: '酒店', path: 'hotel'}
+            {name: '火车票', path: 'train', icon: 'icon-huoche'},
+            {name: '飞机票', path: 'plane', icon: 'icon-hangban'},
+            {name: '汽车票', path: 'bus', icon: 'icon-lvxingshekechejichanggonggongqicheyiwai'},
+            {name: '酒店', path: 'hotel', icon: 'icon-jiudian'}
           ],
           actIndex: '',
           showVisible: true,
@@ -62,19 +63,25 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 4rem;
+            height: 6rem;
+            padding: 2rem;
             background-color: #1F74DF;
-            padding: 0 0.5rem;;
+            padding: 0 0.5rem;
+            margin-bottom: 4rem;
             a
 
                 color: #FFFFFF;
                 text-align: none;
                 display: inline-block;
                 width: 25%;
-                height: 4rem;
-                line-height: 4rem;
+                height: 100%;
+                line-height: 2rem;
+                padding: 1rem 0;
+                i
+                  display: block;
+                  font-size: 2rem;
         .search-view
-            margin-top: 60px;
+            margin-top: 8rem;
         .slide-enter
           transform: translateX(100%);
         .slide-enter-active

@@ -2,7 +2,7 @@
 <div class='train-search'>
     <div class='choice-city choice'>
         <span class='startCity' @click='choiceCity()'>{{city.startCity}}</span>
-        <span class='togIcon' @click='togCity()'>ds</span>
+        <span class='togIcon' @click='togCity()'><i class="iconfont  icon-zhuanhuan1"></i></span>
         <span class='endCity' @click='choiceCity()'>{{city.endCity}}</span>
     </div>
     <div class='choice-date choice'>
@@ -66,6 +66,8 @@
                 text-align: left;
             .endCity
                 text-align: right;
+            .iconfont
+                font-size: 2rem;    
         .choice-date
             border-bottom: 1px solid lightgray;
             span

@@ -4,7 +4,7 @@
             <div class="topnav">
                 <span></span>
                 <span class="title">抢票任务</span>
-                <span @click="addTask" class="add">添加任务</span>
+                <span @click="addTask" class="add"><i class="iconfont icon-jia"></i><br>添加任务</span>
             </div>
             <div class="service">
             </div>
@@ -32,6 +32,7 @@
         >
         <div class="grab-choice">
             <div class="watch-fir">
+                <i class="iconfont icon-jiankong1"></i>
                 <a @click="toWatchFir">余票监控, 抢到再付款</a>
             </div>
             <div class="pay-fir">

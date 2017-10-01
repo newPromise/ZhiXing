@@ -7,6 +7,7 @@ import './assets/ajax.js';
 import store from './store/';
 import Mint from 'mint-ui';
 import vertify from './assets/vertification';
+import './assets/font/iconfont.css';
 // import { Toast } from 'mint-ui';
 // Vue.use(Toast);
 // 静止资源

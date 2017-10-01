@@ -4,11 +4,12 @@
         <div class='fir-line'>
            <header-top title="北京到上海" >
                <div slot="right"><span slot="right">右边</span></div>
+               <div slot="title"><span>北京 <i class="iconfont icon-zhuanhuan"></i> 上海</span></div>
            </header-top>
         </div>
         <div class='sec-line'>
             <span>前一天</span>
-            <span>{{selDate.month}}月{{selDate.day}}</span>
+            <span><i class="iconfont icon-rili"></i> {{selDate.month}}月{{selDate.day}}</span>
             <span @click="dateChange(true)">后一天</span>
         </div>
         <div class='res-type'>

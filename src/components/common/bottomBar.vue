@@ -2,7 +2,7 @@
 <div class='bottom-bar'>
     <ul class='bot-nav'>
         <li v-for='route in bars' :key='route'>
-            <router-link tag='a' :to='route.path'>{{route.name}}</router-link>
+            <router-link tag='a' :to='route.path'><i class="iconfont" :class="route.icon"></i><br>{{route.name}}</router-link>
         </li>
     </ul>
 </div>
@@ -13,10 +13,10 @@
       data () {
         return {
           bars: [
-                {icon: '', name: '首页', path: '/searchMain/train'},
-                {icon: '', name: '抢票', path: '/grabDet'},
-                {icon: '', name: '订单', path: '/orderIndex'},
-                {icon: '', name: '我的', path: '/aboutPerson'}
+                {icon: 'icon-home', name: '首页', path: '/searchMain/train'},
+                {icon: 'icon-miaobiao', name: '抢票', path: '/grabDet'},
+                {icon: 'icon-dingdan', name: '订单', path: '/orderIndex'},
+                {icon: 'icon-person', name: '我的', path: '/aboutPerson'}
           ]
         };
       },
@@ -27,7 +27,7 @@
       }
 };
 </script>
-<style   rel='styleSheet' lang='stylus' scoped>
+<style   rel='styleSheet' lang='stylus' >
     .bottom-bar
         .bot-nav
           background: white;
@@ -36,8 +36,13 @@
           width: 100%;
           li
             text-align: center;
-            line-height: 4rem;
             display: inline-block;
             width: 25%;
             height: 4rem;
+            .iconfont
+              font-size: 1.5rem;
+            a
+              line-height: 2rem;
+            .link-active
+              color: blue;  
 </style>

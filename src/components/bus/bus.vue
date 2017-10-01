@@ -12,7 +12,7 @@
                         <span class="cVal" @click="$router.push('/allCitys')">{{$parent.$data.citys.endCity}}</span>
                     </div>
                 </div>
-                <div @click="toTogCity()" class="togC c-r">转换</div>
+                <div @click="toTogCity()" class="togC c-r"><i class="iconfont icon-zhuanhuan1"></i></div>
             </div>
             <div class="date-s">
                 <div class='s-d'>
@@ -26,6 +26,7 @@
         </div>
         <div class="some-tips">
             <div class="tip" v-for="item of tips">
+                <i class="iconfont" :class="item.icon"></i><br>
                 <span>{{item.title}}</span>
             </div>
         </div>
@@ -41,10 +42,10 @@
           startCity: '北京',
           endCity: '天津',
           tips: [
-            {icon: '', title: '火车票'},
-            {icon: '', title: '机场巴士'},
-            {icon: '', title: '景区直达'},
-            {icon: '', title: '船票'}
+            {icon: 'icon-huoche', title: '火车票'},
+            {icon: 'icon-jichangbashimianfei', title: '机场巴士'},
+            {icon: 'icon-jingqu', title: '景区直达'},
+            {icon: 'icon-chuanbo', title: '船票'}
           ]
         };
       },
@@ -87,6 +88,8 @@
             .city
                 display: flex;
                 width: 100%;
+                .iconfont
+                    transform: rotate(90deg);
                 .c-l,.c-r
                     flex: 1;
                     width: 20%;
