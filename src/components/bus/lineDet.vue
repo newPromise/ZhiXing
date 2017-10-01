@@ -50,7 +50,7 @@
                 </div>
                 <div class="get-phone get-person">
                     <div class="label">手机号</div>
-                    <div class="get-detal phoneNum"><p>2342423423</p></div>
+                    <div class="get-detal phoneNum"><p><input v-model="phone" placeholder="用于接收取票信息"></p></div>
                     <div></div>
                 </div>
             </div>
@@ -66,7 +66,7 @@
                 <mt-cell title="有机会免费获赠保险">
                     <div name="value">保险</div>
                 </mt-cell>
-                <mt-cell  title="不需要附加产品" is-link></mt-cell>
+                <mt-cell  :title="choiceInsur" is-link></mt-cell>
             </div>
             <div class="coupon">
                 <mt-cell title="选择优惠券" value="无可用优惠券"  is-link></mt-cell>
@@ -78,8 +78,8 @@
             </div>
         </div>
         <div class="det-footer">
-            <div class="show-price">￥{{!isOnefree ? choiceLine.price : Number(choiceLine.price) + 1 }}</div>
-            <div class="to-order">立即预订</div>
+            <div class="show-price">￥{{lastPrice}}</div>
+            <div class="to-order" @click="orderNow">立即预订</div>
         </div>
         <mt-popup v-model="instrucPop" position="bottom" @click="instrucPop = false">
             <div class="pop" @click="instrucPop = false">
@@ -89,13 +89,18 @@
         <mt-popup v-model="showSomeInsur" position = "right">
             <div class="insurance">
                 <header-top baccolor="white" color="black" title="服务类型"  hasRight>
+                    <div slot="left">
+                        <span @click="showSomeInsur = false">返回</span>
+                    </div>
                     <div slot="right">
-                        <span>确定</span>
+                        <span @click="showSomeInsur = false">确定</span>
                     </div>
                 </header-top>
                 <div class="insurance-con">
                     <div class="insurance-choices" v-for="item,index of allInsur">
-                        <mt-radio v-model="value"  :options="[item.name+'  '+ `${item.money}元/份`]"></mt-radio>
+                        <mt-radio v-model="choiceInsur"  :options="[item.name]">
+                            <div>我是一段文字</div>
+                        </mt-radio>
                         <mt-cell title="推荐选择, 安全出行, 最高保险23万" v-if="index !== 2"></mt-cell>
                     </div>
                 </div>
@@ -106,27 +111,31 @@
 <script type="text/javascript">
     import headerTop from '../common/header';
     import {mapActions, mapState} from 'vuex';
+    import { Toast } from 'mint-ui';
     export default {
       name: 'lineDet',
       data () {
         return {
+          phone: '',
           instrucPop: false,
           showAddnew: false,
           isOnefree: false,
           showSomeInsur: false,
+          choiceInsur: '不需要任何附加产品',
           allInsur: [
             {
-              name: '汽车乘意险',
-              money: '5',
+              name: '汽车乘意险  5元/人',
+              money: 5,
               insurMon: 10
             },
             {
-              name: '汽车乘意险',
-              money: '10',
+              name: '汽车乘意险  10元/人',
+              money: 10,
               insurMon: 25
             },
             {
-              name: '不需要任何附加产品'
+              name: '不需要任何附加产品',
+              money: 0
             }
           ]
         };
@@ -135,13 +144,40 @@
         headerTop
       },
       computed: {
+        /**
+         * @
+         * @return {[numebr]} [用来计算最终的价格]
+         */
+        lastPrice () {
+          // this.choiceLine.price = 213;
+          this.choiceLine.price = (!this.isOnefree ? this.choiceLine.price : Number(this.choiceLine.price) + 1);
+          this.allInsur.map((item, index) => {
+            if (item.name === this.choiceInsur) {
+              console.log('得到的item', item.money, this.choiceLine.price);
+              this.choiceLine.price = Number(this.choiceLine.price) + item.money;
+            }
+          });
+          return Number(this.choiceLine.price) + 5;
+        },
         ...mapState(['choiceLine', 'busPassenger'])
       },
       methods: {
+        orderNow () {
+          if (this.phone === '') {
+            Toast({
+              message: '请输入手机号',
+              position: 'bottom'
+            });
+          };
+          let ver = this.vertify({name: 'phone', value: this.phone});
+          if (ver) {
+            console.log('dsf');
+          };
+        },
         getInstruc () {
           this.instrucPop = true;
         },
-        ...mapActions([''])
+        ...mapActions(['setBusPassenger'])
       },
       mounted () {
         console.log('得到被选中的车次', this.choiceLine);
