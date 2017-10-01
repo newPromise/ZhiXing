@@ -23,6 +23,9 @@
         <div class="det-content">
             <div class="alert-msg" @click="getInstruc()">
                 <mt-cell  title='备选车次 可退票' is-link></mt-cell>
+                <mt-popup v-model="instrucPop" position="bottom" >
+                    <div class="pop" @click="instrucPop = false"><p>这里是订票说明</p></div>
+                </mt-popup>        
             </div>
             <div class="passenger">
                 <div class="passenger-msg" v-for="item of busPassenger" v-if="item.isPassenger === true">
@@ -81,11 +84,6 @@
             <div class="show-price">￥{{lastPrice}}</div>
             <div class="to-order" @click="orderNow">立即预订</div>
         </div>
-        <mt-popup v-model="instrucPop" position="bottom" @click="instrucPop = false">
-            <div class="pop" @click="instrucPop = false">
-                <p>这里是订票说明</p>
-            </div>
-        </mt-popup>
         <mt-popup v-model="showSomeInsur" position = "right">
             <div class="insurance">
                 <header-top baccolor="white" color="black" title="服务类型"  hasRight>
@@ -123,6 +121,7 @@
           showSomeInsur: false,
           choiceInsur: '不需要任何附加产品',
           insurancePrice: '',
+          lastPrice: 0,
           allInsur: [
             {
               name: '汽车乘意险  5元/人',
@@ -144,23 +143,34 @@
       components: {
         headerTop
       },
-      computed: {
-        /**
-         * @
-         * @return {[numebr]} [用来计算最终的价格]
-         */
-        lastPrice () {
-          // this.choiceLine.price = 213;
-          this.choiceLine.price = (!this.isOnefree ? this.choiceLine.price : Number(this.choiceLine.price) + 1);
+      watch: {
+        'isOnefree': function (val, old) {
+          console.log('yesss', this.lastPrice);
+          if (val !== 'undefined') {
+            console.log('food', val);
+            if (val) {
+              console.log(this.lastPrice);
+              this.lastPrice = this.lastPrice + 1;
+            } else {
+              this.lastPrice = this.lastPrice - 1;
+            }
+            console.log(this.lastPrice);
+          }
+        },
+        'insurancePrice': function (val, old) {
+          console.log('变化的保险只', val);
+          this.lastPrice = Number(this.lastPrice) - old;
+          this.lastPrice = Number(this.lastPrice) + val;
+        },
+        'choiceInsur': function (val, old) {
           this.allInsur.map((item, index) => {
-            if (item.name === this.choiceInsur) {
+            if (item.name === val) {
               this.insurancePrice = item.money;
-              console.log('得到的item', item.money, this.choiceLine.price);
-              this.choiceLine.price = Number(this.choiceLine.price) + item.money;
             }
           });
-          return Number(this.choiceLine.price) + 5;
-        },
+        }
+      },
+      computed: {
         ...mapState(['choiceLine', 'busPassenger'])
       },
       methods: {
@@ -199,6 +209,8 @@
         ...mapActions(['setBusPassenger', 'setBusallorders', 'setBusorder'])
       },
       mounted () {
+        this.lastPrice = Number(this.choiceLine.price);
+        console.log('最终的价格', this.lastPrice);
       }
     };
 </script>
@@ -226,14 +238,12 @@
                 background: white;
                 margin-bottom: 1rem;
             .alert-msg
-                .mint-popup, .pop
+                .pop
                     height: 100%;
                     width: 100%;
                     background: rgba(39, 40, 34, 0.3 );
                     color: white;
-                    font-size: 1.5rem;
-                .pop
-                    padding: 4rem;      
+                    font-size: 1.5rem;    
             .passenger, .ticket-get
                 .passenger-msg
                     height: 4rem;
@@ -325,6 +335,5 @@
                     .insurance-choices
                         background: white;
                         >.mint-cell:last-child
-                            padding: 0 1rem;           
-                            
+                            padding: 0 1rem;                               
 </style>

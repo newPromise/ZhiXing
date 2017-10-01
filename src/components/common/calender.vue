@@ -1,20 +1,12 @@
 <template>
     <div class='calender'>
         <div class='top'>
-            <div class='cal-top'>
-            <div class='back'>
-                <span @click='goBack'>back</span>
+            <header-top baccolor="white" color="black" title="选择日期"></header-top>
+            <div class='cal-week'>
+                <ul class='week-bar'>
+                    <li v-for='week of weeks'>{{week}}</li>
+                </ul>
             </div>
-            <div class='title'>
-                <span>选择日期</span>
-            </div>
-            <div></div>
-        </div>
-        <div class='cal-week'>
-            <ul class='week-bar'>
-                <li v-for='week of weeks'>{{week}}</li>
-            </ul>
-        </div>
         </div>
         <div class='cal-body'>
             <div class='mon' v-for='mon of monArr'>
@@ -31,6 +23,7 @@
     </div>
 </template>
 <script type="text/javascript">
+    import headerTop from './header';
     import {mapState, mapActions} from 'vuex';
     export default {
       name: 'calender',
@@ -61,6 +54,9 @@
       },
       computed: {
         ...mapState(['selDate'])
+      },
+      components: {
+        headerTop
       },
       methods: {
         goBack () {
@@ -120,6 +116,7 @@
             top: 0;
             left: 0;
             width: 100%;
+            z-index: 10;
         .cal-top
             width: 100%;
             height: 4rem;
@@ -141,7 +138,10 @@
                     flex: 1;
                     background-color: #D1CFCF;
         .cal-body
-            margin-top: 6rem; 
+            margin-top: 6rem;
+            background: white;
+            text-align: left;
+            padding-left: 2rem;
             .mon
                 position: relative;
             .mon-line
