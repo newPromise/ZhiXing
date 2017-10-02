@@ -26,9 +26,29 @@
                           <div class="main-l">
                               <span>距离</span>
                           </div>
-                          <div class="main-r"></div>
+                          <div class="main-r">
+                              <mt-radio 
+                                  align="right"
+                                  
+                                  v-model="filters.distance"
+                                  :options="distanceChoices">
+                            </mt-radio>
+                          </div>
                       </div>
-                      <div class="ensure"></div>
+                      <div class="ensure">
+                          <button class="ensureBtn">确定</button>
+                      </div>
+                  </div>
+                  <div v-if="activeFilter === 'price' ">
+                    <div class="hotel-starLev">
+                        <div class="star-choice">
+                            <div><span @click="choiceStar(item.v)" v-for="item of starTys[0] ">{{item.t}}</span></div>
+                            <div><span @click="choiceStar(item.v)" v-for="item of starTys[1]">{{item.t}}</span></div>
+                        </div>
+                    </div>
+                    <div class="ensure">
+                          <button class="ensureBtn">确定</button>
+                      </div>
                   </div>
               </div>
             </mt-popup>
@@ -50,9 +70,21 @@
             sort: '欢迎度排行',
             others: '筛选'
           },
+          distanceChoices: [
+            {label: '不限', value: '不限'},
+            {label: '500米以内', value: '500米以内'},
+            {label: '1公里以内', value: '1公里以内'},
+            {label: '2公里以内', value: '2公里以内'},
+            {label: '3公里以内', value: '3公里以内'}
+          ],
           activeIndex: '',
           popupVisible: false,
           activeFilter: '',
+          distance: '',
+          stars: [],
+          sortTys: '',
+          otherFilters: '',
+          starTys: [[{t: '不限', v: ''}, {t: '连锁酒店', v: '连锁酒店'}, {t: '二星记一下', v: '1,2'}], [{t: '三星/舒适', v: '3'}, {t: '四星/高档', v: '4'}, {t: '五星/豪华', v: '5'}]],
           hotelTys: [
             {title: '可订', code: ''},
             {title: '含早', code: ''},
@@ -63,6 +95,12 @@
         };
       },
       methods: {
+        choiceStar (value) {
+          if (value !== '') {
+            if ( ) {
+            }    
+          }    
+        },
         filterPop (key) {
           this.activeFilter = key;
           this.popupVisible = true;
@@ -84,6 +122,7 @@
                     width: 100%;
                     display: flex;
                     span
+                        overflow: hidden;
                         text-align: center;
                         flex: 1;
                         height: 2rem;
@@ -114,17 +153,44 @@
                         width: 100%;
                         .main-l
                             width: 30%;
+                            background: gray;
                             span
+                                color: black;
                                 height: 4rem;
                                 text-align: center;
                                 line-height: 4rem;
                                 width: 100%
                                 float: left;
                                 overflow: hidden;
-                            
+                        .main-r
+                            overflow: hidden;    
+                    .hotel-starLev
+                        padding: 2rem;
+                      .star-choice
+                          >div
+                              display: flex;
+                              width: 100%;
+                              span
+                                  flex: 1;
+                                  height: 3rem;
+                                  text-align: center;
+                                  line-height:3rem;
+                                  border: 1px solid gray;
+                                  margin: 1rem;
+                                    
                       
             .v-modal
-                top: 8rem;    
+                top: 8rem;
+            .ensure
+                padding: 1rem;
+                .ensureBtn
+                    width: 100%;
+                    height: 3rem;
+                    line-height: 3rem;
+                    background: #FC6E51;
+                    color: white;
+                    border: none;
+                      
                               
                     
 </style>
