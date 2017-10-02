@@ -8,7 +8,7 @@
                     <span class="s-c">{{startCity}}</span>
                 </div>
                 <div class="tog">
-                   <span>转换</span>
+                   <span><i class="iconfont icon-zhuanhuan1"></i></span>
                 </div>
                 <div class="e-c-c">
                     <span class="e-l label">到达城市</span>
@@ -27,7 +27,7 @@
         <div class="msg">
             <span class="label">短信提醒</span>
             <span class="num content"><input onkeyup="this.value=this.value.replace(/[^\d]/g,'') " type="text" v-model="phoneNum" placeholder="请输入手机号"></span>
-            <span class="icon phoneIcon">滴孩啊</span>
+            <span class="icon phoneIcon"><i class="iconfont icon-dianhuabao"></i></span>
         </div>
         <div class="next">
             <a @click="toWatch">下一步</a>>
@@ -153,6 +153,8 @@
 </script>
 <style type="text/css" lang="stylus" scoped>
     .watch-set
+        .iconfont
+          font-size: 2rem;
         >div
             background-color: white;
             border-bottom: 1px solid gray;

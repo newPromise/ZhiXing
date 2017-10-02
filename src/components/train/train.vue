@@ -6,7 +6,7 @@
         <span class='endCity' @click='choiceCity()'>{{city.endCity}}</span>
     </div>
     <div class='choice-date choice'>
-        <span class='date' >{{selDate.month}}月{{selDate.day}}</span>
+        <span class='date' @click="$router.push('/calender')">{{selDate.month + 1}}月{{selDate.day}}</span>
     </div>
     <div class='choice-sty choice'>
         <span class='isHigh'>高铁动车<input type='checkbox' v-model='ishigh'></span>
@@ -47,7 +47,7 @@
       }
     };
 </script>
-<style type='text/style' rel='styleSheet' lang='stylus'>
+<style type='text/style' rel='styleSheet' lang='stylus' scoped>
     .train-search
         background: white;
         padding: 1rem;

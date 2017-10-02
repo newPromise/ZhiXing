@@ -16,7 +16,7 @@
                 </div>
                 <div class='mon-body'>
                     <span class='blank-day' v-for='day in mon.blankDate' >{{}}</span>
-                    <span class='day' :class="[((new Date().getDate() > day && new Date().getMonth() + 1 === mon.month)) ? ('overDate') : ((activeDay === day && activeMon === mon.month) ? 'selected' : '' )]" @click='selectDay(day, mon.month)' v-for='day in mon.dayNums'>{{day}}</span>
+                    <span class='day' :class="[((new Date().getDate() > day && new Date().getMonth() === mon.month)) ? ('overDate') : ((activeDay === day && activeMon === mon.month) ? 'selected' : '' )]" @click='selectDay(day, mon.month)' v-for='day in mon.dayNums'>{{day}}</span>
                 </div>
             </div>
         </div>
@@ -73,7 +73,7 @@
           this.activeMon = month;
           console.log('被选中的月 日', day, month + 1);
           let timer = setTimeout(() => {
-            this.setDate({month: this.activeMon + 1, day: this.activeDay});
+            this.setDate({month: this.activeMon, day: this.activeDay});
             this.goBack();
             console.log('yes');
           }, 1000);

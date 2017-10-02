@@ -4,7 +4,7 @@
             <div class='head-act'>
                <header-top :title="title"  hasRight>
                  <div slot="right">
-                   <span>确定</span>
+                   <span @click="ensure()">确定</span>
                  </div>
                </header-top>
             </div>

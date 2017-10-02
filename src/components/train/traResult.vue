@@ -26,37 +26,38 @@
                 <!-- 对于获得到的数据进行循环 -->
                 <div class='list' v-for="item,index of ticketRes" key="index">
                     <div class='tra-det'>
-                         <div>
+                         <div class="tra-start">
                             <p class='time start'><span>{{item.starttime}}</span></p>
                             <p class='city'>{{item.station}}</p>
                         </div>
                         <div>
                             <p class='area'>
                                 <span class='timeArea'>{{item.costtime}}</span>
-                                <span class='line'></span>
+                                <span class='line'><i class="iconfont icon-tejiajipiaojiantou"></i></span>
                                 <span class='trainNo'>{{item.trainno}}</span>
                             </p>
                         </div>
-                        <div>
+                        <div class="tra-end">
                             <p class='time end'><span>{{item.endtime}}</span></p>
                             <p class='city end'>{{item.endstation}}</p>
                         </div>
                         <div>
-                            <p class='fare'>￥232</p>
+                            <p class='fare'>￥232起</p>
                         </div>
                     </div>
                     <div class='site'>
-
+                  
+                  
                         <p v-if="item.trainno.slice(0,1) === 'K'">
-                            <span>硬座:{{showPrice ? ticketPrice(item.station, item.endstation, item.trainno) : item.yz}}</span>
+                            <span>硬座:{{showPrice ? ticketPrice(item.trainno) : item.yz}}</span>
                             <span>硬卧:{{showPrice ? ticketPrice(item.trainno) : item.yw}}</span>
-                            <span>软卧:{{showPrice ? ticketPrice(item.station, item.endstation, item.trainno) : item.rw}}</span>
-                            <span>无座:{{showPrice ? ticketPrice(item.station, item.endstation, item.trainno) : item.wz}}</span>
+                            <span>软卧:{{showPrice ? ticketPrice(item.trainno) : item.rw}}</span>
+                            <span>无座:{{showPrice ? ticketPrice(item.trainno) : item.wz}}</span>
                         </p>
                         <p v-else>
-                            <span>一等座:{{showPrice ? ticketPrice(item.station, item.endstation, item.trainno) : item.yd}}</span>
-                            <span>二等座:{{showPrice ? ticketPrice(item.station, item.endstation, item.trainno) : item.ed}}</span>
-                            <span>无座:{{showPrice ? ticketPrice(item.station, item.endstation, item.trainno) : item.wz}}</span>
+                            <span>一等座:{{showPrice ? ticketPrice(item.trainno) : item.yd}}</span>
+                            <span>二等座:{{showPrice ? ticketPrice(item.trainno) : item.ed}}</span>
+                            <span>无座:{{showPrice ? ticketPrice(item.trainno) : item.wz}}</span>
                         </p>
                       
                     </div>
@@ -185,14 +186,17 @@
         }
       },
       computed: {
-        ticketPrice (lineno) {
-          // this.getLineRes({trainno: lineno});
-          console.log('车次信息', this.lineRes);
-          return this.lineRes;
-        },
         ...mapState(['ticketRes', 'lineRes', 'selDate', 'stationRes'])
       },
       methods: {
+        ticketPrice (lineno) {
+          console.log('去哦被');
+          // this.getLineRes({trainno: lineno});
+          console.log('我在这儿');
+          console.log('车次信息', this.lineRes);
+          // return this.lineRes
+          return '';
+        },
         filterType (time) {
           this.filterAct = time;
           console.log('得到的值', this.filterAct);
@@ -225,7 +229,7 @@
         ...mapActions(['setStationRes', 'getTicketRes', 'setLineRes', 'getStationRes', 'getLineRes'])
       },
       mounted () {
-        // this.getResult();
+        this.getResult();
         setTimeout(function () {
           console.log('res', this.stationRes);
         }, 10);
@@ -285,19 +289,22 @@
         .tra-det
             display: flex;
             box-sizing: content-box;
+            .train-start
+              p
+                text-align: left ;
+            .train-end
+              text-align: right;     
             div
                 flex: 1;
-                width: 25%;
+                width: 25%; 
                 .time
                   span
                     font-size: 1.5rem;
                 .start
                     color: #5495E6;  
                 .fare
-                  color: #FFFEFE;
-                  font-size: 1.5rem;     
-                          
-                  
+                  color: #FC6E51;
+                  font-size: 1.3rem;    
                 p
                     line-height: 2rem;
                     text-align: center;
@@ -305,6 +312,10 @@
                 .area
                     >span
                         display: block;
+                        height: 1rem;
+                    .icon-tejiajipiaojiantou
+                      height: 1.4rem;
+                      font-size: 0.1rem;    
         .site
             width: 100%;
             p
