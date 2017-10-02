@@ -65,7 +65,7 @@
       methods: {
         filterPop (key) {
           this.activeFilter = key;
-          this.popupVisible = true;  
+          this.popupVisible = true;
         }
       },
       mounted () {
@@ -122,7 +122,7 @@
                                 float: left;
                                 overflow: hidden;
                             
-                    .ensure   
+                      
             .v-modal
                 top: 8rem;    
                               
