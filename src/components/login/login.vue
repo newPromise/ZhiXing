@@ -57,7 +57,7 @@
       }
     };
 </script>
-<style type="text/css" lang="stylus">
+<style type="text/css" lang="stylus" scoped>
   .login
     .login-body
       .notAgree

@@ -103,7 +103,7 @@
       }
     };
 </script>
-<style type="text/css" lang="stylus">
+<style type="text/css" lang="stylus" scoped>
   .plane
     >div:not(:first-child)
       margin: 1rem 0;

@@ -91,7 +91,8 @@
         getPro () {
           let obj = {url: 'api/area/province'};
           obj.params = {
-            appkey: '3cf7ad9107df44c9'
+            appkey: '3cf7ad9107df44c9',
+            appsecret: '7Iq25fL9BuX6xiNoMnTcQ85TAD8IrZEW'
           };
           obj.success = res => {
             res.result.length = res.result.length - 1;

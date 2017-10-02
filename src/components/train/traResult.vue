@@ -8,8 +8,10 @@
            </header-top>
         </div>
         <div class='sec-line'>
-            <span>前一天</span>
-            <span><i class="iconfont icon-rili"></i> {{selDate.month}}月{{selDate.day}}</span>
+            <span @click="dateChange(false)">前一天</span>
+              <transition name="togDate">
+                <span v-if="selDate.day"  @click="$router.push('/calender')"><i class="iconfont icon-rili"></i> {{selDate.month + 1}}月{{selDate.day}}</span>
+              </transition>
             <span @click="dateChange(true)">后一天</span>
         </div>
         <div class='res-type'>
@@ -210,9 +212,12 @@
           let month = date[1];
           let year = date[0];
           if (next) {
+            this.selDate.day ++;
             day++;
             console.log('yesss');
             this.date = `{${year}-${month}-${day}}`;
+          } else {
+            this.selDate.day --;
           }
           this.trainRes();
         },
@@ -229,7 +234,7 @@
         ...mapActions(['setStationRes', 'getTicketRes', 'setLineRes', 'getStationRes', 'getLineRes'])
       },
       mounted () {
-        this.getResult();
+        // this.getResult();
         setTimeout(function () {
           console.log('res', this.stationRes);
         }, 10);
@@ -246,16 +251,16 @@
     .tra-res
         padding: 0;
         padding-top: 4rem;
-    .search-head
-        position: fixed;
-        top: 0;
-        left: 0;
-        width:100%;
-        background-color: #5495E6;
+      .search-head
+          position: fixed;
+          top: 0;
+          left: 0;
+          width:100%;
+          background-color: #5495E6;
     .res-body
         margin-top: 7rem;
         margin-bottom: 4rem;      
-    .tra-res
+    .search-head
         .sec-line
             padding: 1rem;
             height: 4rem;
@@ -383,6 +388,12 @@
                 background-image: none !important;
             .mint-cell
                 text-align: left !important;    
+    .togDate-enter
+      transform: translateY(-10px);
+    .togDate-enter-active, .togDate-leave
+      translation: all 2s;              
+                
+                
             
                     
 </style>

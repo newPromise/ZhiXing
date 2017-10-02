@@ -43,7 +43,7 @@
       }
     };
 </script>
-<style type="text/css" lang='stylus'>
+<style type="text/css" lang='stylus' >
     .about-person
         .content
         .header

@@ -121,7 +121,7 @@
       }
     };
 </script>
-<style type="text/css" lang="stylus" scoped>
+<style type="text/css" lang="stylus" >
     .addNew
         .add
             width: 100%;
@@ -157,10 +157,10 @@
                 text-align: left;            
         .allPassengers
             background: white;
+            .mint-checklist-title
+              margin: 0;
             .peg-item
                 display: flex;
-                .mint-checklist-title
-                    margin: 0;
                 >div
                     flex: 1;
                     height: 4rem;
@@ -174,5 +174,7 @@
                         display: table-cell;
                         vertical-align: middle;
                         line-height: 1.6rem;
+    .mint-checklist-title
+      margin: 0 !important;                    
                      
 </style>

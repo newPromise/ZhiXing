@@ -17,7 +17,7 @@
             <div class="date-s">
                 <div class='s-d'>
                     <span class="cLabel">出发日期</span>
-                    <span class="cVal" @click="$router.push('/Calender')">{{$parent.$data.date.month}}月{{$parent.$data.date.day}}日</span>
+                    <span class="cVal" @click="$router.push('/Calender')">{{$parent.$data.date.month + 1}}月{{$parent.$data.date.day}}日</span>
                 </div>
             </div>
             <div class="search">
@@ -70,7 +70,7 @@
         },
         searchBus () {
           console.log('us', this.busLine);
-          this.getBusline({start: this.start, end: this.end});
+          this.getBusline({start: this.$parent.$data.citys.startCity, end: this.$parent.$data.citys.endCity});
         },
         ...mapActions(['getBusline'])
       },

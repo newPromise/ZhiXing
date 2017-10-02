@@ -12,6 +12,7 @@ import LineDet from '@/components/bus/lineDet';
 import AddNew from '@/components/bus/addNew';
 import OrderDetail from '@/components/bus/orderDetail';
 import Hotel from '@/components/hotel/hotel';
+import HotelCity from '@/components/hotel/hotelCity';
 import HotRes from '@/components/hotel/hotResult';
 import AllCitys from '@/components/common/allCitys';
 import Calender from '@/components/common/calender';
@@ -71,7 +72,8 @@ export default new Router({
     // 车次详细信息
     {path: '/lineDet', name: 'lineDet', component: LineDet},
     // 生成订单
-    {path: '/orderDetail', name: 'orderDetail', component: OrderDetail}
-
+    {path: '/orderDetail', name: 'orderDetail', component: OrderDetail},
+    // 酒店城市列表
+    {path: '/hotelCity', name: 'hotelCity', component: HotelCity}
   ]
 });

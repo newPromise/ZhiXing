@@ -13,7 +13,7 @@
         <span class="isStudent">学生票<input type="checkbox" v-model="isStudent"></span>
     </div>
     <div class='search'>
-        <button class='searchBtn'  @click="$router.push('/trainRes')">查询</button>
+        <button class='searchBtn'  @click="getTicket()">查询</button>
     </div>
 </div>
 </template>
@@ -30,6 +30,11 @@
         ...mapState(['city', 'selDate'])
       },
       methods: {
+        getTicket () {
+          console.log('被选中的日期', this.selDate);
+          this.$router.push('/trainRes');
+          this.getTicketRes({start: this.city.startCity, end: this.city.endCity, date: this.selDate});
+        },
         choiceCity () {
           this.$router.push('/allCitys');
         },
@@ -37,7 +42,7 @@
           // es6 解构赋值,用于交换变量
           [this.city.startCity, this.city.endCity] = [this.city.endCity, this.city.startCity];
         },
-        ...mapActions(['setDate', 'setTrainRes'])
+        ...mapActions(['setDate', 'setTrainRes', 'getTicketRes'])
       },
       mounted () {
         if (this.selDate.month && this.selDate.day) {

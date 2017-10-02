@@ -49,7 +49,20 @@ let state = {
   // busOrder, 汽车订单
   busOrder: {},
   // 汽车所有订单
-  busAllorders: []
+  busAllorders: [],
+  // 酒店搜索详情// 位置, localtion  时间，date: { enterData,leaceDate}  关键词, keyWords: 价格，星级
+  searchHoteldata: {},
+  // 酒店省份列表
+  hotelPro: [],
+  // 酒店城市列表, 对象形式,属性值为省份拼音首字母
+  hotelCity: [],
+  // indexCity; 用于存放根据索引首字母获取到相关城市的
+  // 对象数组形式, 属性是首字母, 值是城市列表
+  indexCity: {},
+  // hotelSelc 酒店选择的城市
+  hotelSelc: '',
+  // 查询到的酒店详细信息
+  hotelDet: ''
 };
 
 export {state};

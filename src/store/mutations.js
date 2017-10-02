@@ -66,6 +66,46 @@ const mutations = {
         state.busAllorders.splice(index, 1);
       }
     });
+  },
+  // 用于存放搜索的酒店信息
+  setHoteldata (state, obj) {
+    state.searchHoteldata = obj;
+  },
+  // 设定酒店省份
+  setHotelpro (state, obj) {
+    state.hotelPro = obj;
+  },
+  // 用于存放所有的城市,将城市的对象 push 进入
+  setHotelcity (state, obj) {
+    if (obj) {
+      state.hotelCity.push(...obj);
+    }
+  },
+  // 用来存放对应索引的城市, 这个地方需要进行运算
+  setIndexcity (state, value) {
+    // let letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    let obj = {};
+    value.map((item, index) => {
+      if (item.prefixLetter) {
+        let index = item.prefixLetter;
+        if (obj[index]) {
+          if (obj[index].indexOf(item.name) === -1) {
+            obj[index].push(item.name);
+          }
+        } else {
+          obj[index] = [];
+          obj[index].push(item.name);
+        }
+      }
+    });
+    console.log('obj', obj);
+    state.indexCity = obj;
+  },
+  setHotelSelc (state, value) {
+    state.hotelSelc = value;
+  },
+  setHoteldet (state, value) {
+    state.hotelDet = value;
   }
 };
 export { mutations };

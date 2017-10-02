@@ -44,7 +44,7 @@
       }
     };
 </script>
-<style type="text/css" lang="stylus">
+<style type="text/css" lang="stylus" scoped>
     .trainNoRes
         background: white;
         .tip-bar,.site-lists

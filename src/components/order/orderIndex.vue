@@ -34,7 +34,7 @@
       }
     };
 </script>
-<style type="text/css" lang="stylus">
+<style type="text/css" lang="stylus" scoped>
     .orderIndex
         .header
             height: 4rem;

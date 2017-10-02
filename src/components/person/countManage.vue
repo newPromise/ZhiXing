@@ -64,7 +64,7 @@
       }
     };
 </script>
-<style type="text/css" lang="stylus">
+<style type="text/css" lang="stylus" scoped>
     .count-manage
         .tit
             height: 3rem;

@@ -89,7 +89,7 @@
       }
     };
 </script>
-<style type="text/css" lang="stylus">
+<style type="text/css" lang="stylus" scoped>
     .search
         padding: 0 1rem;
     .mint-popup

@@ -51,7 +51,7 @@
       }
     };
 </script>
-<style type="text/css" lang="stylus">
+<style type="text/css" lang="stylus" scoped>
     .outer-service
         .content
             .item-one, .item-two, .item-there,.item-four

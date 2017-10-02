@@ -139,6 +139,64 @@ const actions = {
   },
   delBusallorders: ({commit}, newVal) => {
     commit('delBusallorders', newVal);
+  },
+  // 获取到各个省份的酒店
+  getProhotel: ({commit}) => {
+    let obj = { url: '' };
+    obj.params = {
+      showapi_sign: '4e1311ce4fd04c7bb8c75c49fb75ed71',
+      showapi_appid: 47232
+    };
+    obj.success = res => {
+      commit('proHotel', res.result);
+    };
+    vue.$get(obj);
+  },
+  // 存放搜索酒店的信息
+  setHoteldata: ({commit}, newVal) => {
+    commit('setHoteldata', newVal);
+  },
+  // 查询相关的酒店省份id
+  getHotelpro: ({commit}) => {
+    vue.$http.get('http://route.showapi.com/405-1', {params: {showapi_sign: '4e1311ce4fd04c7bb8c75c49fb75ed71', showapi_appid: '47232'}}).then(response => {
+      commit('setHotelpro', response.body.showapi_res_body.list);
+      let pros = response.body.showapi_res_body.list;
+      console.log('pros', pros[0].id);
+      let i = 0;
+      console.log(Vue.$state);
+      let timer = setInterval(() => {
+        if (pros[i]) {
+          this.a.getHotelcity({commit}, pros[i].id);
+        }
+        console.log(i);
+        i++;
+        if (i > pros.length) {
+          clearInterval(timer);
+          // commit('setIndexcity', )
+        }
+      }, 1000);
+      timer;
+    }, response => {});
+  },
+  // 根据省份 id 得到省份市
+  getHotelcity: ({commit}, proId) => {
+    vue.$http.get('http://route.showapi.com/405-3', {params: {provinceId: proId, showapi_sign: '4e1311ce4fd04c7bb8c75c49fb75ed71', showapi_appid: '47232'}}).then(response => {
+      let lists = response.body.showapi_res_body.list;
+      commit('setHotelcity', lists);
+    }, response => {});
+  },
+  setIndexcity: ({commit}, cityArr) => {
+    commit('setIndexcity', cityArr);
+  },
+  setHotelSelc: ({commit}, newVal) => {
+    commit('setHotelSelc', newVal);
+  },
+  // getHoteldet 用于获得酒店的详细信息
+  getHoteldet: ({commit}, queryParams) => {
+    vue.$http.get('http://route.showapi.com/405-5', {params: {...queryParams, showapi_sign: '4e1311ce4fd04c7bb8c75c49fb75ed71', showapi_appid: '47232'}}).then(response => {
+      console.log('response', response);
+      // commit('setHoteldet');
+    }, response => {});
   }
 };
 

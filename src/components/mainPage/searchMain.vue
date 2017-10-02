@@ -56,7 +56,7 @@
       }
     };
 </script>
-<style  rel='styleSheet' lang='stylus'>
+<style  rel='styleSheet' lang='stylus' scoped>
     .search-main
         .search-head
             position: fixed;
