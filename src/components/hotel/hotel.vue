@@ -1,8 +1,8 @@
 <template>
     <div class="hotel">
         <div class="search-list">
-            <div class="local" @click="$router.push('/hotelCity')">
-                <span v-text="location"></span>
+            <div class="local" @click="isPopCity = true">
+                <span v-text="cityName"></span>
                 <span></span>
             </div>
             <div class="time">
@@ -10,10 +10,10 @@
                     <span>入住</span>
                     <span>离店</span>
                 </p>
-                <p class="date">
-                    <span class="s-d">9月15号</span>
-                    <span class="nightNum">1玩</span>
-                    <span class="e-d">9月16号</span>
+                <p class="date" @click="popCalender = !popCalender">
+                    <span class="s-d">{{cometime}}</span>
+                    <span class="nightNum">{{dayNum}}晚</span>
+                    <span class="e-d">{{leavetime}}</span>
                 </p>
             </div>
             <div class="keyWord">
@@ -26,6 +26,7 @@
             <button class="searchBtn" @click="getHotel">查询</button>
         </div>
         </div>
+        <double-cal :mon.sync="mon" :cometime.sync="cometime" :dayNum.sync="dayNum" :leavetime.sync="leavetime" :popup.sync="popCalender"></double-cal>
         <mt-popup v-model="showStarty" position="bottom">
             <div class="type-choice">
                 <div class="price">
@@ -47,20 +48,31 @@
                     <div><span v-for="item of starLev[1]">{{item}}</span></div>
                 </div>
                 <div class="search">
-                    <button class="searchBtn">确定</button>
+                    <button  class="searchBtn">确定</button>
                 </div>
+                <p>{{hotelCity}}</p>
             </div>
         </mt-popup>
+        <hotel-city :popCity.sync="isPopCity" :cityName.sync="cityName"></hotel-city>
     </div>
 </template>
 <script type="text/javascript">
+    import doubleCal from '../common/doubleCal';
+    import hotelCity from './hotelCity';
     import {mapActions, mapState} from 'vuex';
     export default {
       data () {
         return {
+          mon: '',
+          dayNum: '',
+          cityName: '',
+          isPopCity: false,
+          cometime: '',
+          leavetime: '',
+          popCalender: false,
           keyWords: '',
           star: '',
-          location: '张宁宁',
+          citys: '',
           showCity: false,
           showStarty: false,
           lowPrice: '',
@@ -69,9 +81,12 @@
         };
       },
       components: {
+        doubleCal,
+        hotelCity
       },
       computed: {
         getAllCitys () {
+          console.log(this.hotelCity);
           return this.setIndexcity(this.hotelCity);
         },
         ...mapState(['hotelPro', 'hotelCity', 'indexCity'])
@@ -80,9 +95,16 @@
         getHotel () {
           let obj = {
             cityId: '45',
-            comeDate: '20171005',
-            leaveDate: '20171006'
+            comeDate: '20171009',
+            leaveDate: '20171013'
           };
+          obj.comeDate = '2017' + this.mon + 1 + this.cometime.split('月')[1].split('日')[0];
+          obj.leaveDate = '2017' + this.mon + 1 + this.leavetime.split('月')[1].split('日')[0];
+          this.citys.map((item, index) => {
+            if (item.name === this.cityName) {
+              obj.cityId = item.id;
+            }
+          });
           this.getHoteldet(obj);
           this.$router.push('/hotRes');
           console.log('我是一个好好的人啊');
@@ -91,8 +113,9 @@
         ...mapActions(['getHotelpro', 'getHotelcity', 'setIndexcity', 'getHoteldet'])
       },
       mounted () {
-        // this.getHotelpro();
-        // this.getAllCitys();
+        this.getHotelpro();
+        this.getAllCitys();
+        this.citys = this.hotelCity;
       }
     };
 </script>
@@ -108,6 +131,9 @@
                 height: 4rem;
                 display: flex;
                 line-height: 4rem;
+            .local
+                span
+                    font-size: 1.5rem;    
             .keyWord,.star
                 text-align: left;
             .time

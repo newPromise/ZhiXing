@@ -45,7 +45,7 @@
                 <div class="choice-house">
                     <div class="choice-date">
                         <div class="cometime">
-                            <p class="label">入住</p>
+                            <p class="label">{{hotelPrice}}</p>
                             <p><span class="time">10月03日</span></p>
                         </div>
                         <div class="alltime">

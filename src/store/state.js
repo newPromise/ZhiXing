@@ -59,8 +59,8 @@ let state = {
   // indexCity; 用于存放根据索引首字母获取到相关城市的
   // 对象数组形式, 属性是首字母, 值是城市列表
   indexCity: {},
-  // hotelSelc 酒店选择的城市
-  hotelSelc: '',
+  // hotelSelc 酒店选择的信息
+  hotelSelc: {},
   // 查询到的酒店详细信息
   hotelDet: '',
   // 查看的详细的酒店信息

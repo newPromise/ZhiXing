@@ -71,7 +71,6 @@
         selectDay (day, month) {
           this.activeDay = day;
           this.activeMon = month;
-          console.log('被选中的月 日', day, month + 1);
           let timer = setTimeout(() => {
             this.setDate({month: this.activeMon, day: this.activeDay});
             this.goBack();

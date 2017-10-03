@@ -48,9 +48,6 @@
                             </mt-radio>
                           </div>
                       </div>
-                      <div class="ensure">
-                          <button class="ensureBtn">确定</button>
-                      </div>
                   </div>
                   <div v-if="activeFilter === 'price' ">
                     <div class="hotel-starLev">
@@ -95,6 +92,9 @@
                       </div>
                     </div>
                     <div class="others-ensure"></div>
+                  </div>
+                  <div class="search">
+                    <button class="searchBtn">确定</button>
                   </div>
               </div>
             </mt-popup>
@@ -237,11 +237,11 @@
          * @return {[type]}      [description]
          */
         viewDetail (item) {
-          // this.getHotelPriceSearch(item.hotelId);
+          this.getHotelPriceSearch(item.hotelId);
           this.setHotelitem(item);
           this.$router.push('/hotelDetail');
         },
-        ...mapActions(['setHotelitem', 'getHotelPriceSearch'])
+        ...mapActions(['setHotelitem', 'getHotelPriceSearch', 'getHoteldet'])
       },
       mounted () {
         console.log('旅店详情梵蒂冈', this.hotelDet);

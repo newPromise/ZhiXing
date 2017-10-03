@@ -101,6 +101,7 @@ const mutations = {
     console.log('obj', obj);
     state.indexCity = obj;
   },
+  // 用于保存酒店搜索的相关信息, 包括城市 ID, 入住时间， 离开时间等关键信息
   setHotelSelc (state, value) {
     state.hotelSelc = value;
   },

@@ -208,7 +208,7 @@ const actions = {
   // 根据酒店id 查询酒店价格相关信息
   getHotelPriceSearch: ({commit}, hotelId) => {
     // Indicator.open('正在查询酒店信息');
-    vue.$http.get('http://route.showapi.com/405-8', {params: {hotelId: hotelId, comeDate: '20171011', leaveDate: '20171012', showapi_sign: '4e1311ce4fd04c7bb8c75c49fb75ed71', showapi_appid: '47232'}}).then(response => {
+    vue.$http.get('http://route.showapi.com/405-8', {params: {hotelId: hotelId, comeDate: '20171018', leaveDate: '20171020', showapi_sign: '4e1311ce4fd04c7bb8c75c49fb75ed71', showapi_appid: '47232'}}).then(response => {
       commit('setHotelPriceSearch', response.body.showapi_res_body.list);
       // Indicator.close();
     }, response => {
