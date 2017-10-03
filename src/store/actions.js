@@ -193,10 +193,26 @@ const actions = {
   },
   // getHoteldet 用于获得酒店的详细信息
   getHoteldet: ({commit}, queryParams) => {
+    // Indicator.open('正在查询所有酒店');
     vue.$http.get('http://route.showapi.com/405-5', {params: {...queryParams, showapi_sign: '4e1311ce4fd04c7bb8c75c49fb75ed71', showapi_appid: '47232'}}).then(response => {
-      console.log('response', response);
-      // commit('setHoteldet');
-    }, response => {});
+      console.log('response', response.body.showapi_res_body.list);
+      commit('setHoteldet', response.body.showapi_res_body.list);
+      // Indicator.close();
+    }, response => {
+      this.Toast('bad');
+    });
+  },
+  setHotelitem: ({commit}, newVal) => {
+    commit('setHotelitem', newVal);
+  },
+  // 根据酒店id 查询酒店价格相关信息
+  getHotelPriceSearch: ({commit}, hotelId) => {
+    // Indicator.open('正在查询酒店信息');
+    vue.$http.get('http://route.showapi.com/405-8', {params: {hotelId: hotelId, comeDate: '20171011', leaveDate: '20171012', showapi_sign: '4e1311ce4fd04c7bb8c75c49fb75ed71', showapi_appid: '47232'}}).then(response => {
+      commit('setHotelPriceSearch', response.body.showapi_res_body.list);
+      // Indicator.close();
+    }, response => {
+    });
   }
 };
 

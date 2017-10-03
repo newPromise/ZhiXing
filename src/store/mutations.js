@@ -106,6 +106,12 @@ const mutations = {
   },
   setHoteldet (state, value) {
     state.hotelDet = value;
+  },
+  setHotelitem (state, value) {
+    state.hotelItem = value;
+  },
+  setHotelPriceSearch (state, value) {
+    state.hotelPrice = value;
   }
 };
 export { mutations };

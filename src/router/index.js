@@ -14,6 +14,7 @@ import OrderDetail from '@/components/bus/orderDetail';
 import Hotel from '@/components/hotel/hotel';
 import HotelCity from '@/components/hotel/hotelCity';
 import HotRes from '@/components/hotel/hotResult';
+import HotelDetail from '@/components/hotel/hotelDetail';
 import AllCitys from '@/components/common/allCitys';
 import Calender from '@/components/common/calender';
 import GrabDet from '@/components/grabTic/grabDet';
@@ -74,6 +75,8 @@ export default new Router({
     // 生成订单
     {path: '/orderDetail', name: 'orderDetail', component: OrderDetail},
     // 酒店城市列表
-    {path: '/hotelCity', name: 'hotelCity', component: HotelCity}
+    {path: '/hotelCity', name: 'hotelCity', component: HotelCity},
+    // 酒店详细信息
+    {path: '/hotelDetail', name: 'hotelDetail', component: HotelDetail}
   ]
 });

@@ -9,13 +9,13 @@ import Mint from 'mint-ui';
 import vertify from './assets/vertification';
 import './assets/font/iconfont.css';
 import VueResource from 'vue-resource';
-// import { Toast } from 'mint-ui';
 // Vue.use(Toast);
 // 静止资源
 import './assets/CSS/style.css';
 import '../node_modules/mint-ui/lib/style.css';
 
 Vue.prototype.vertify = vertify;
+// Vue.prototype.toast = Toast;
 Vue.use(Mint);
 Vue.use(VueResource);
 

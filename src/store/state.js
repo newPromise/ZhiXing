@@ -62,7 +62,11 @@ let state = {
   // hotelSelc 酒店选择的城市
   hotelSelc: '',
   // 查询到的酒店详细信息
-  hotelDet: ''
+  hotelDet: '',
+  // 查看的详细的酒店信息
+  hotelItem: '',
+  // 酒店价格
+  hotelPrice: ''
 };
 
 export {state};
