@@ -270,8 +270,13 @@
                         margin: 1rem 0;
                         border-right: 1px solid lightgray;                    
                 .tip-select
+                    position: relative;
+                    height: 4rem;
                     padding: 1rem 0;
+                    overflow: hidden;
+                    white-space: nowrap;
                     .selects
+                        position: absolute;
                         text-align: left;
                         span
                             display: inline-block;
