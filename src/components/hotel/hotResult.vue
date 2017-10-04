@@ -22,7 +22,7 @@
                </div>
                <div class="hotel-desc">
                  <p class="hotel-name">{{item.hotelName}}</p>
-                 <p class="hotel-score">{{hotelDetScore[item.starRatedId]}}   {{item.commentTotal}}人评价 </p>
+                 <p class="hotel-score">{{hotelDetScore[item.starRatedId]}}   {{item.commentTotal || 0}}人评价 </p>
                  <p class="hotel-distance">{{item.nearBy}}</p>
                  <p class="hotel-price">234</p>
                </div>
@@ -94,7 +94,7 @@
                     <div class="others-ensure"></div>
                   </div>
                   <div class="search">
-                    <button class="searchBtn">确定</button>
+                    <button class="searchBtn" @click="ensureFilter">确定</button>
                   </div>
               </div>
             </mt-popup>
@@ -117,13 +117,13 @@
             sort: '低价优先',
             others: '筛选'
           },
-          sortOpts: {
-            '1': '低价优先',
-            '2': '高价优先',
-            '3': '入住量',
-            '4': '推荐度',
-            '5': '距离优先'
-          },
+          sortOpts: [
+            {label: '低价优先', value: 1},
+            {label: '高价优先', value: 2},
+            {label: '入住量', value: 3},
+            {label: '推荐度', value: 4},
+            {label: '距离优先', value: 5}
+          ],
           distanceChoices: [
             {label: '不限', value: '不限'},
             {label: '500米以内', value: '500米以内'},
@@ -160,7 +160,7 @@
           },
           otherTitindex: '',
           breakAbout: '',
-          starTys: [[{t: '不限', v: ''}, {t: '一星酒店', v: '1'}, {t: '二星酒店', v: '2'}], [{t: '三星/舒适', v: '3'}, {t: '四星/高档', v: '4'}, {t: '五星/豪华', v: '5'}]],
+          starTys: [[{t: '不限', v: ''}, {t: '一星酒店', v: 63}, {t: '二星酒店', v: 152}], [{t: '三星/舒适', v: 3}, {t: '四星/高档', v: 2}, {t: '五星/豪华', v: 1}]],
           hotelTys: [
             {title: '可订', code: ''},
             {title: '含早', code: ''},
@@ -183,13 +183,29 @@
       },
       watch: {
         'sortTypes': function (val) {
-          this.filters.sort = this.sortOpts[this.sortTypes];
+          this.sortOptions.map((item) => {
+            if (item.value === val) {
+              this.filters.sort = item.label;
+            }
+          });
         }
       },
       computed: {
-        ...mapState(['hotelDet'])
+        ...mapState(['hotelDet', 'hotelSelc'])
       },
       methods: {
+        ensureFilter () {
+          this.popupVisible = false;
+          console.log('是否需要进行显示', this.popupVisible);
+          let filterObj = {
+            sortType: this.sortTypes,
+            starRatedId: ''
+          };
+          filterObj.starRatedId = this.stars.reduce((pev, next) => {
+            return pev + ',' + next;
+          });
+          this.getHoteldet({...this.hotelSelc, ...filterObj});
+        },
         /**
          * [tipSlec 表示选择动作]
          * @params {['string']} [被选中的项]
@@ -215,8 +231,8 @@
               this.stars.splice(this.stars.indexOf(''), 1);
             }
             this.filters.price = this.stars.reduce((pev, next) => {
-              return pev + '星, ' + next;
-            });
+              return pev + this.hotelDetScore[next];
+            }, '');
           } else {
             if (this.stars.indexOf('') !== -1) {
               this.stars = [];
@@ -237,17 +253,13 @@
          * @return {[type]}      [description]
          */
         viewDetail (item) {
-          this.getHotelPriceSearch(item.hotelId);
+          this.getHotelPriceSearch(429511);
           this.setHotelitem(item);
           this.$router.push('/hotelDetail');
         },
         ...mapActions(['setHotelitem', 'getHotelPriceSearch', 'getHoteldet'])
       },
       mounted () {
-        console.log('旅店详情梵蒂冈', this.hotelDet);
-        this.hotelDet.map((item, index) => {
-          console.log('lvdian', item);
-        });
       }
     };
 </script>
@@ -305,6 +317,9 @@
                 .hotel-desc
                   width: 60%;
                   >p
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    overflow: hidden;
                     width: 100%;
                     height: 2rem;
                     line-height: 2rem;
@@ -333,7 +348,9 @@
                                 float: left;
                                 overflow: hidden;
                         .main-r
-                            overflow: hidden;    
+                            overflow: hidden;
+                    .search
+                      padding: 0 1rem;        
                     .hotel-starLev
                       padding: 2rem;
                       .star-choice

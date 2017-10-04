@@ -1,10 +1,11 @@
 <template>
   <div id="app">
     <router-view class='main-view'></router-view>
-    <bottom-bar></bottom-bar>
+    <bottom-bar v-show="botShow"></bottom-bar>
   </div>
 </template>
 <script>
+import {mapActions, mapState} from 'vuex';
 import bottomBar from '@/components/common/bottomBar';
 export default {
   name: 'app',
@@ -16,6 +17,13 @@ export default {
       botShow: true
     };
   },
+  computed: {
+    getAllCitys () {
+      console.log('dsd', this.hotelCity);
+      return this.setIndexcity(this.hotelCity);
+    },
+    ...mapState(['hotelPro', 'hotelCity', 'indexCity'])
+  },
   watch: {
     '$route.path': function (val) {
       let arr = ['searchMain'];
@@ -23,6 +31,13 @@ export default {
         return ~val.indexOf(item);
       });
     }
+  },
+  methods: {
+    ...mapActions(['getHotelpro', 'getHotelcity', 'setIndexcity', 'getHoteldet'])
+  },
+  mounted () {
+    this.getHotelpro();
+    this.getAllCitys();
   }
 };
 </script>

@@ -1,7 +1,7 @@
 <template>
     <div class="busRes">
         <div class="bus-header">
-            <header-top :title="result[0].startcity+'-'+result[0].endcity" baccolor="white" color="black"></header-top>
+            <header-top backRoute="searchMain/bus" :title="result[0].startcity+'-'+result[0].endcity" baccolor="white" color="black"></header-top>
             <div class="head-bar">
                 <span class="filter" @click="showFilter = !showFilter">筛选</span>
                 <span  @click="outWork" class="go">下班就走</span>
@@ -44,7 +44,7 @@
                 <div class="bus-price">
                     <p class="price">￥{{item.price}}</p>
                     <p>余票</p>
-                    <p>时间</p>
+                    <p><span v-if="item.distance">距离  {{item.distance}}</span></p>
                 </div>
             </div>
         </div>
@@ -98,6 +98,7 @@
       methods: {
         // 查看车次详细信息
         lineDetail (item) {
+          item.price = Number(item.price);
           this.setChoiceline(item);
           this.$router.push('/lineDet');
         },

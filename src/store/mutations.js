@@ -31,6 +31,9 @@ const mutations = {
     state.stationRes = newVal;
     console.log('我被存上了', newVal);
   },
+  setViewtrano (state, newVal) {
+    state.viewTrano = newVal;
+  },
   getLineRes (state, newVal) {
     state.lineRes = newVal;
   },
@@ -79,6 +82,7 @@ const mutations = {
   setHotelcity (state, obj) {
     if (obj) {
       state.hotelCity.push(...obj);
+      sessionStorage.setItem('hotelCity', JSON.stringify(state.hotelCity));
     }
   },
   // 用来存放对应索引的城市, 这个地方需要进行运算
@@ -100,6 +104,7 @@ const mutations = {
     });
     console.log('obj', obj);
     state.indexCity = obj;
+    sessionStorage.setItem('indexCity', JSON.stringify(state.indexCity));
   },
   // 用于保存酒店搜索的相关信息, 包括城市 ID, 入住时间， 离开时间等关键信息
   setHotelSelc (state, value) {

@@ -91,8 +91,8 @@
           this.leavetime = this.selects[1];
           this.$emit('update:dayNum', this.leavetime - this.cometime);
           this.$emit('uodate:mon', this.month);
-          this.$emit('update:cometime', this.month + '月' + this.cometime + '日');
-          this.$emit('update:leavetime', this.month + '月' + this.leavetime + '日');
+          this.$emit('update:cometime', this.month + 1 + '月' + this.cometime + '日');
+          this.$emit('update:leavetime', this.month + 1 + '月' + this.leavetime + '日');
           this.$emit('update:popup', false);
         }
       },

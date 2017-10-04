@@ -1,6 +1,6 @@
 <template>
     <div class="watch-set">
-        <header-top title="监控设置"></header-top>
+        <header-top backRoute="/grabDet" title="监控设置"></header-top>
         <div class="choice">
             <div class="city">
                 <div class="s-c-c">
@@ -8,7 +8,7 @@
                     <span class="s-c">{{startCity}}</span>
                 </div>
                 <div class="tog">
-                   <span><i class="iconfont icon-zhuanhuan1"></i></span>
+                   <span @click="togCity()"><i class="iconfont icon-zhuanhuan1"></i></span>
                 </div>
                 <div class="e-c-c">
                     <span class="e-l label">到达城市</span>
@@ -54,7 +54,7 @@
         };
       },
       computed: {
-        ...mapState(['siteTys', 'selDate', 'grabTicks', 'ticketRes'])
+        ...mapState(['siteTys', 'selDate', 'grabTicks', 'ticketRes', 'viewTrano'])
       },
       components: {
         headerTop
@@ -71,7 +71,7 @@
               text: '正在查询车次',
               spinnerType: 'fading-circle'
             });
-            this.getTicketRes({start: this.startCity, end: this.endCity, date: '2017-09-27'});
+            this.getTicketRes({start: this.startCity, end: this.endCity, date: `2017-${this.date.month < 10 ? `0${this.date.month}` : this.date.month}-${this.date.day}`});
             setTimeout(() => {
               Indicator.close();
               this.$router.push('/choiceTrainNo');
@@ -88,6 +88,9 @@
               return pev + ',' + next;
             });
           }
+        },
+        togCity () {
+          [this.startCity, this.endCity] = [this.endCity, this.startCity];
         },
         addWatch () {
           let watchItem = {
@@ -141,6 +144,7 @@
         ...mapActions(['setDate', 'setGrabTicks', 'getLineRes', 'getTicketRes'])
       },
       mounted () {
+        this.choices[1].val = this.viewTrano.join();
         this.getSiteTys();
         this.date = this.selDate;
         if (typeof this.date.month === 'undefined') {

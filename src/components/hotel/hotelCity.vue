@@ -3,7 +3,7 @@
     <div class="city-hotel">
         <div class="all-citys" @click="showCity = false">
             <header-top title="选择城市">
-              <span slot="left" @click="goBack()">发挥</span>
+              <span slot="left" @click="goBack()">返回</span>
             </header-top>
                 <div class="city-content">
                     <div class="city-item" v-for="item, key of indexCity">
@@ -25,10 +25,16 @@
       props: ['popCity', 'cityName'],
       data () {
         return {
+          isPop: false
         };
       },
       components: {
         headerTop
+      },
+      watch: {
+        'indexCity': function (val) {
+          console.log('新的值', val);
+        }
       },
       computed: {
         getAllCitys () {
@@ -38,6 +44,7 @@
       },
       methods: {
         goBack () {
+          console.log('indexCity', this.indexCity);
           this.popCity = false;
           this.$emit('update:popCity', false);
         },
@@ -51,7 +58,9 @@
         ...mapActions(['getHotelpro', 'getHotelcity', 'setIndexcity', 'setHotelSelc'])
       },
       mounted () {
-        this.getAllCitys();
+        console.log('sessionStorage中的内容', JSON.parse(sessionStorage.getItem('indexCity')));
+        console.log('indexCity', this.indexCity);
+        // this.getAllCitys();
         // this.popVisible = true;
       }
     };

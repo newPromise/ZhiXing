@@ -59,7 +59,7 @@
 </template>
 <script type="text/javascript">
     import headerTop from '../common/header';
-    import {Toast} from 'mint-ui';
+    import { Toast } from 'mint-ui';
     import {mapActions, mapState} from 'vuex';
     export default {
       name: 'addNew',
@@ -100,18 +100,15 @@
          * 将乘客人的信息保存
          */
         savePassenger () {
-          console.log('name', this.name);
-          if (this.name === '') {
-            Toast({
-              message: '为您筛选16:00之后出发的车次',
-              position: 'bottom',
-              duration: 5000
-            });
-            console.log('我倒德奥了');
-          }
-          if (this.paperNo === '') {
-            return;
-          }
+          let papernoVer = this.vertify({name: 'personCard', value: this.paperNo});
+          let nameVer = this.vertify({name: 'name', value: this.name});
+          if (!papernoVer) {
+            alert('错了');
+            Toast({message: '身份证错了'});
+          };
+          if (!nameVer) Toast('姓名格式不正确');
+          if (!papernoVer || !nameVer) return;
+          Toast('添加乘客成功');
           this.setPassenger({name: this.name, type: this.type, paperTy: this.paperTy, paperNo: this.paperNo});
           this.popVisible = false;
         },
@@ -121,7 +118,7 @@
       }
     };
 </script>
-<style type="text/css" lang="stylus" scoped>
+<style type="text/css" lang="stylus" >
     .addNew
         .add
             width: 100%;

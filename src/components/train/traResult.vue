@@ -2,7 +2,7 @@
 <div class='tra-res'>
     <div class='search-head'>
         <div class='fir-line'>
-           <header-top title="北京到上海" >
+           <header-top title="北京到上海" backRoute="/searchMain/train">
                <div slot="right"><span slot="right">右边</span></div>
                <div slot="title"><span>北京 <i class="iconfont icon-zhuanhuan"></i> 上海</span></div>
            </header-top>

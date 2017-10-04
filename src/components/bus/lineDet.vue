@@ -1,7 +1,7 @@
 <template>
     <div class="lineDet">
         <div class="det-header">
-            <header-top title='时间选择'></header-top>
+            <header-top backRoute="/busRes" title='时间选择'></header-top>
             <div class="head-msg">
                 <div class="start-msg">
                     <p class="time">{{choiceLine.starttime}}</p>
@@ -29,13 +29,13 @@
             </div>
             <div class="passenger">
                 <div class="passenger-msg" v-for="item of busPassenger" v-if="item.isPassenger === true">
-                    <div class="del-show">del</div>
+                    <div class="del-show" @click="delPassenger(item)">del</div>
                     <div class="pass-msg">
                         <div class="per-msg">
                             <p>{{item.name}}  <span>{{item.type}}</span></p>
                             <p>{{item.paperNo}}</p>
                         </div>
-                        <div v-show="false"  class='per-del'>删除</div>
+                        <div v-show="false" class='per-del'>删除</div>
                     </div>
                 </div>
                 <div class="add-passenger">
@@ -158,7 +158,6 @@
           }
         },
         'insurancePrice': function (val, old) {
-          console.log('变化的保险只', val);
           this.lastPrice = Number(this.lastPrice) - old;
           this.lastPrice = Number(this.lastPrice) + val;
         },
@@ -179,16 +178,12 @@
          * @return {[type]} [description]
          */
         orderNow () {
-          if (this.phone === '') {
-            Toast({
-              message: '请输入手机号',
-              position: 'bottom'
-            });
+          if (this.busPassenger.length === 0) {
+            Toast('请添加乘客');
+            return;
           };
           let ver = this.vertify({name: 'phone', value: this.phone});
-          console.log(ver);
           if (ver) {
-            console.log('dsf');
             let datas = {
               phone: this.phone,
               price: '',
@@ -202,6 +197,10 @@
             this.setBusallorders({...this.choiceLine, ...datas});
             this.$router.push('/orderDetail');
           };
+        },
+        choicePassenger (item) {
+          item.isPassenger = false;
+          this.setBusPassenger(item);
         },
         getInstruc () {
           this.instrucPop = true;
@@ -331,7 +330,7 @@
             height: 100%;
             .insurance
                 .insurance-con
-                    padding: 1rem;
+                    padding: 1rem 0;
                     .insurance-choices
                         background: white;
                         >.mint-cell:last-child

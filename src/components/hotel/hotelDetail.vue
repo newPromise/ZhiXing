@@ -46,14 +46,14 @@
                     <div class="choice-date">
                         <div class="cometime">
                             <p class="label">{{hotelPrice}}</p>
-                            <p><span class="time">10月03日</span></p>
+                            <p><span class="time">{{comeMon}}月{{comeDay}}号</span></p>
                         </div>
                         <div class="alltime">
-                            <span class="timenum">一晚</span>
+                            <span class="timenum">{{leaveDay - comeDay}}晚</span>
                         </div>
                         <div class="leavetime">
                             <p class="label">离店</p>
-                            <p><span class="time">10月04日</span></p>
+                            <p><span class="time">{{leaveMon}}月{{leaveDay}}号</span></p>
                         </div>
                     </div>
                     <div class="choice-tys">
@@ -99,7 +99,12 @@
             'mfqx': '免费取消'
           },
           isFiltitem: '',
-          filterArr: []
+          filterArr: [],
+          comeMon: '',
+          leaveMon: '',
+          comeDay: '',
+          leaveDay: '',
+          dayNum: ''
         };
       },
       components: {
@@ -109,7 +114,7 @@
         hotelMore () {
           return {...this.hotelPrice, ...this.hotelItem};
         },
-        ...mapState(['hotelPrice', 'hotelItem'])
+        ...mapState(['hotelPrice', 'hotelItem', 'hotelSelc'])
       },
       methods: {
         /**
@@ -128,6 +133,12 @@
         ...mapActions(['getHotelPriceSearch'])
       },
       mounted () {
+        this.comeMon = this.hotelSelc.comeDate.slice(4, 6);
+        this.comeDay = this.hotelSelc.comeDate.slice(6);
+        this.leaveMon = this.hotelSelc.leaveDate.slice(4, 6);
+        this.leaveDay = this.hotelSelc.leaveDate.slice(6);
+        console.log('选中的日期', this.hotelSelc);
+        console.log('床型', this.hotelPrice);
         // this.toast('goood');
       }
     };
@@ -191,7 +202,6 @@
                         height: 1.4rem;
                         line-height: 1.4rem;    
         .content
-            height: 100rem;
             margin-top: 14rem;
             >div
                 padding: 1rem;

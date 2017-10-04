@@ -3,7 +3,7 @@
     <div class="header" :style="{background: baccolor, color: color}">
         <div class="left">
             <slot name="left">
-                <span @click="$router.go(-1)"><i class="iconfont icon-jiantou-copy-copy1"></i></span>
+                <span @click="goBack"><i class="iconfont icon-jiantou-copy-copy1"></i></span>
             </slot>
         </div>
         <div class="title">
@@ -48,6 +48,13 @@
         };
       },
       methods: {
+        goBack () {
+          if (this.backRoute) {
+            this.$router.push(this.backRoute);
+          } else {
+            this.$router.back(-1);
+          }
+        }
       },
       mounted () {
       }

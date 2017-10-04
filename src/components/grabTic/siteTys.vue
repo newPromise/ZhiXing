@@ -44,7 +44,7 @@
         ...mapState(['siteTys'])
       },
       watch: {
-        'value': function (val) {
+        value: function (val) {
           if (val) {
             if (val.indexOf('全部类型') >= 0) {
               this.value = this.tys;
@@ -54,6 +54,9 @@
               if (this.value.length === this.tys.length - 1) {
                 this.value = [];
               }
+            }
+            if (val.length !== 14) {
+              this.value.splice(this.value.indexOf('全部类型'), 1);
             }
           };
         }

@@ -23,7 +23,7 @@
                 <span  @click="showStarty = true" :class="{'active' : !star}" v-text="star || '价格/星级' "></span>
             </div>
             <div class="search">
-            <button class="searchBtn" @click="getHotel">查询</button>
+            <button class="searchBtn" @click="hotels">查询</button>
         </div>
         </div>
         <double-cal :mon.sync="mon" :cometime.sync="cometime" :dayNum.sync="dayNum" :leavetime.sync="leavetime" :popup.sync="popCalender"></double-cal>
@@ -75,8 +75,8 @@
           citys: '',
           showCity: false,
           showStarty: false,
-          lowPrice: '',
-          highPrice: '',
+          lowPrice: 0,
+          highPrice: 100,
           starLev: [['不限', '连锁酒店', '二星及以下'], ['三星/舒适', '四星/高档', '五星/豪华']]
         };
       },
@@ -92,29 +92,29 @@
         ...mapState(['hotelPro', 'hotelCity', 'indexCity'])
       },
       methods: {
-        getHotel () {
+        hotels () {
           let obj = {
+            cityName: '',
             cityId: '45',
             comeDate: '20171009',
             leaveDate: '20171013'
           };
+          /*
           obj.comeDate = '2017' + this.mon + 1 + this.cometime.split('月')[1].split('日')[0];
           obj.leaveDate = '2017' + this.mon + 1 + this.leavetime.split('月')[1].split('日')[0];
-          this.citys.map((item, index) => {
+          */
+          JSON.parse(sessionStorage.getItem('hotelCity')).map((item, index) => {
             if (item.name === this.cityName) {
               obj.cityId = item.id;
             }
           });
+          this.setHotelSelc(obj);
           this.getHoteldet(obj);
           this.$router.push('/hotRes');
-          console.log('我是一个好好的人啊');
-          console.log(this.hotelCity);
         },
-        ...mapActions(['getHotelpro', 'getHotelcity', 'setIndexcity', 'getHoteldet'])
+        ...mapActions(['getHotelpro', 'setHotelSelc', 'getHotelcity', 'setIndexcity', 'getHoteldet'])
       },
       mounted () {
-        this.getHotelpro();
-        this.getAllCitys();
         this.citys = this.hotelCity;
       }
     };

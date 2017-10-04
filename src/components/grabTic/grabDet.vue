@@ -16,7 +16,7 @@
                         <p class="city"><span>{{item.city.startCity}}</span>到<span>{{item.city.endCity}}</span></p>
                         <p class="date">{{item.date}}出发</p>
                     </div>
-                    <p class="find-msg">就打扫房间的；啊</p>
+                    <p class="find-msg">正在进行监控</p>
                 </div>
                 <div class="item-right">
                     <div class="item-act">
